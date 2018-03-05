@@ -14,21 +14,29 @@ import java.util.ArrayList;
 public class Personnel {
     private String nom;
     private String prenom;
-    private int id;
+    private String id;
     private String motDePasse;
-    private Localisation service;
+    private String service;
     private Fonction fonction;
     private ArrayList<Patient> listePatients=new ArrayList<Patient>();
     
-    public Personnel(String nom, String prenom, int id, String motDePasse, Localisation service, Fonction fonction, ArrayList<Patient> listePatient){
+    public Personnel(String nom, String prenom, String id, String motDePasse, String service, Fonction fonction, ArrayList<Patient> listePatient){
         this.nom=nom;
         this.prenom=prenom;
         this.id=id;
         this.motDePasse=motDePasse;
         this.service=service;
         this.fonction=fonction;
-        this.listePatients=listePatient;
-        
+        this.listePatients=listePatient;        
+    }
+    
+    public Personnel(String nom, String prenom, String id, String motDePasse, String service, Fonction fonction){
+        this.nom=nom;
+        this.prenom=prenom;
+        this.id=id;
+        this.motDePasse=motDePasse;
+        this.service=service;
+        this.fonction=fonction;
     }
 
     /**
@@ -48,7 +56,7 @@ public class Personnel {
     /**
      * @return the id
      */
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -62,7 +70,7 @@ public class Personnel {
     /**
      * @return the service
      */
-    public Localisation getService() {
+    public String getService() {
         return service;
     }
 

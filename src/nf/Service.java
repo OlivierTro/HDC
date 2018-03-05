@@ -12,11 +12,19 @@ package nf;
 public enum Service {
     MedicoTechnique("Medico-Technique"),
     Clinique("Clinique"),
-    Anesthesie("Anesthésie");
+    Anesthesie("Anesthésie"),
+    Radiologie("Radiologie");
     
     private String service;
     
     private Service(String service){
         this.service=service;
+    }
+
+    /**
+     * @return the service
+     */
+    public String getService() {
+        return service;
     }
 }

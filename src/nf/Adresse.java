@@ -22,6 +22,10 @@ public class Adresse {
         this.numero=numero;
     }
     
+    public String toString(){
+        return this.getNumero()+" "+this.getVoie() +"  \n" + this.getCodePostal()+" "+ this.getVille();
+    }
+    
     public String getVille(){
         return ville;
     }
