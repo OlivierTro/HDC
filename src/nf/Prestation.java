@@ -5,7 +5,11 @@
  */
 package nf;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -19,13 +23,13 @@ public class Prestation {
     private String auteurR;
     private String resultat;
     private String prestation;
-    private Localisation service;
+    private Service service;
     
     public Prestation(String prestation){
         this.prestation=prestation;
     }
     
-    public Prestation(String nomPrestation, Timestamp dateD, Timestamp dateR, String auteurD, String auteurR, String resultat, String prestation, Localisation service){
+    public Prestation(String nomPrestation, Timestamp dateD, Timestamp dateR, String auteurD, String auteurR, String resultat, String prestation, Service service){
         this.nomPrestation=nomPrestation;
         this.dateD=dateD;
         this.dateR=dateR;
@@ -36,6 +40,33 @@ public class Prestation {
         this.service=service;
     }
 
+    public void ajouterResultat(Sejour sejour, String resultat, String auteurR) {
+        this.resultat = resultat;
+        this.auteurR = auteurR;
+        java.util.Date now = new java.util.Date();
+        this.dateR = new java.sql.Timestamp(now.getTime());
+        boolean j=false;
+         try {
+            String requete = "UPDATE prestation SET resultat = ? , dateresultat = ? , auteurresultat = ? ";
+            requete += " WHERE numsejour= ? ";
+            requete += " AND datedemande= ? ";
+            PreparedStatement state = ConnexionBD.getInstance().prepareStatement(requete);
+            state.setString(1,resultat);
+            state.setTimestamp(2,this.dateR);
+            state.setString(3,auteurR);
+            state.setString(4,sejour.getNumSejour());
+            state.setTimestamp(5,this.dateD);
+            int i = state.executeUpdate();
+            if (i == 1) {
+                j = true;
+            }
+            state.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
     /**
      * @return the nomPrestation
      */
@@ -88,7 +119,7 @@ public class Prestation {
     /**
      * @return the service
      */
-    public Localisation getService() {
+    public Service getService() {
         return service;
     }
 

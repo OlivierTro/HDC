@@ -112,7 +112,7 @@ public class Patient {
             try {
                 String requete = "INSERT INTO sejour(ipp,numsejour,datearrive,lit,phresponssable,service,auteur,dateEdition,lettredesortie) "
                         + "VALUES( ? , ? , ? , ? , ? , ? , ? , ? , ? ) ";
-                PreparedStatement state = ConnBD.getInstance().prepareStatement(requete);
+                PreparedStatement state = ConnexionBD.getInstance().prepareStatement(requete);
                 state.setString(1, this.ipp);
                 state.setInt(2, numSejour);
                 state.setDate(3, dateArrive);
@@ -146,7 +146,7 @@ public class Patient {
         try {
             String requete = "UPDATE dpi SET hospitalise = ? ";
             requete += " WHERE ipp= ? ";
-            PreparedStatement state = ConnBD.getInstance().prepareStatement(requete);
+            PreparedStatement state = ConnexionBD.getInstance().prepareStatement(requete);
             state.setInt(1, 1);
             state.setInt(2, this.ipp);
             state.executeUpdate();
@@ -162,7 +162,7 @@ public class Patient {
         try {
             String requete = "UPDATE dpi SET hospitalise = ? ";
             requete += " WHERE ipp= ? ";
-            PreparedStatement state = ConnBD.getInstance().prepareStatement(requete);
+            PreparedStatement state = ConnexionBD.getInstance().prepareStatement(requete);
             state.setInt(1, 0);
             state.setInt(2, this.ipp);
             state.executeUpdate();
@@ -178,7 +178,7 @@ public class Patient {
         try {
 
             String requete = "SELECT count(numsejour) FROM sejour;";
-            Statement state = ConnBD.getInstance().createStatement();
+            Statement state = ConnexionBD.getInstance().createStatement();
             ResultSet res = state.executeQuery(requete);
             if (res.next()) {
                 java.util.Date now = new java.util.Date();
@@ -200,7 +200,7 @@ public class Patient {
         try {
             String requete = "SELECT * FROM sejour";
             requete += " WHERE ipp= ? ";
-            PreparedStatement state = ConnBD.getInstance().prepareStatement(requete);
+            PreparedStatement state = ConnexionBD.getInstance().prepareStatement(requete);
             state.setInt(1, this.ipp);
             state.execute();
             ResultSet res = state.getResultSet();
@@ -230,7 +230,7 @@ public class Patient {
         try {
             String requete = "UPDATE dpi SET localisationservice = ? ";
             requete += " WHERE ipp = ? ";
-            PreparedStatement state = ConnBD.getInstance().prepareStatement(requete);
+            PreparedStatement state = ConnexionBD.getInstance().prepareStatement(requete);
             state.setString(1, service.toString());
             state.setInt(2, this.ipp);
             int i = state.executeUpdate();
@@ -314,7 +314,7 @@ public class Patient {
         try {
             String requeteSql = " SELECT * FROM dpi NATURAL JOIN codepostal ";
             requeteSql += " WHERE ipp= ? ";
-            PreparedStatement state = ConnBD.getInstance().prepareStatement(requeteSql);
+            PreparedStatement state = ConnexionBD.getInstance().prepareStatement(requeteSql);
             state.setInt(1, IPP);
             state.execute();
             ResultSet res = state.getResultSet();

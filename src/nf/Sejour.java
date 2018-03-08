@@ -13,8 +13,8 @@ import java.util.ArrayList;
  */
 public class Sejour {
     private String numSejour;
-    private DateE dateArrivee;
-    private DateE dateSortie;
+    private Date dateArrivee;
+    private Date dateSortie;
     private String numeroDeLit;
     private String nomPH;
     private String lettreSortie;
@@ -24,7 +24,7 @@ public class Sejour {
     private ArrayList<String> listePrescription = new ArrayList<String>();
     
     //dma
-    public Sejour(String numeroSejour, DateE dateArrivee, DateE dateSortie, String nomPH, String lettreSortie, ArrayList<String> listePrescription){
+    public Sejour(String numeroSejour, Date dateArrivee, Date dateSortie, String nomPH, String lettreSortie, ArrayList<String> listePrescription){
         this.numSejour=numSejour;
         this.dateArrivee=dateArrivee;
         this.dateSortie=dateSortie;
@@ -52,4 +52,11 @@ public class Sejour {
         this.listePrestation=listePrestation;
     }
 
+    
+    /**
+     * @return the nDeSejour
+     */
+    public String getNumSejour() {
+        return this.numSejour;
+    }
 }
