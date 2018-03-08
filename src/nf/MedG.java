@@ -20,6 +20,40 @@ public class MedG {
         this.adresseMail=adresseMail;
     }
     
+    /**
+     * Permet d'obtenir le prenom, le nom d'un medecin
+     * généraliste
+     * 
+     * @return un String
+     */
+    public String toString() {
+        return getPrenom() + " " + getNom();
+    }
+
+    /**
+     * Permet d'obtenir le prenom, le nom et le mail d'un medecin
+     *
+     * @return un String
+     */
+    public String toStringF() {
+        return getPrenom() + " " + getNom() + ", " + getAdresseMail();
+    }
+
+    /**
+     * Permet de verifier si un objet est de type MedG
+     *
+     * @param o prend un objet
+     * @return true si l'objet est un medecin, false sinon
+     */
+    public boolean equals(Object o) {
+        if (o instanceof MedG) {
+            MedG p = (MedG) o;
+            return getNom().equals(p.getNom()) && getPrenom().equals(p.getPrenom());
+        } else {
+            return false;
+        }
+    }
+    
     public String getAdresseMail(){
         return adresseMail;
     }

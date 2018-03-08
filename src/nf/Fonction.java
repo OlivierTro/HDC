@@ -10,6 +10,7 @@ package nf;
  * @author ANNELAURE
  */
 public enum Fonction {
+    DECO("Deconnecte"),
     ph("ph"),
     chefPh("chefPh"),
     infirmiere("inf"),
@@ -35,6 +36,15 @@ public enum Fonction {
      */
     public void setFonction(String fonction) {
         this.fonction = fonction;
+    }
+
+    /**
+     * Permet d'obtenir la fonction d'un personnel
+     *
+     * @return un String, la fonction
+     */
+    public String toString() {
+        return fonction;
     }
     
 }

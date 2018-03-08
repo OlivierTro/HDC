@@ -66,6 +66,45 @@ public class Patient {
         return (this.ipp.equalsIgnoreCase(p.getIpp()));
     }
 
+     /**
+     * Renvoie le prenom, le nom, la date de naissance, le sexe et le numero de
+     * securite sociale d'un patient
+     * @return Retourne un paramètre de type String
+     */
+    public String toString() {
+        return getPrenom() + " " + getNomUsuel() + " - " + getDateNaissance().toStringN() + " / " + getSexe()+ " / " + getIpp();
+        }
+    
+    /**
+     * Renvoie le prenom, le nom usuel, la date de naissance, le sexe et le numero d'un patient
+     * @return Retourne un paramètre de type String
+     */
+    public String toStringF() {
+        return getPrenom() + " " + getNomUsuel() + " - " + getDateNaissance().toStringN() + " / " + getSexe() + " / Numero id : " + getIpp();
+        }
+    
+    /**
+     * Renvoie le prenom et le nom usuel d'un patient
+     * @return un String, le prenom et le nom
+     */
+    public String toStringT() {
+        return getPrenom() + " " + getNomUsuel();
+        }
+    
+    /**
+     * Permet de verifier si un objet est de type Patient
+     * @param o prend un objet
+     * @return true si l'objet est de type patient, false sinon
+     */
+    public boolean equals(Object o) {
+        if (o instanceof Patient) {
+            Patient p = (Patient)o;
+            return getNomUsuel().equals(p.getNomUsuel()) && getPrenom().equals(p.getPrenom()) && (this.ipp == p.getIpp());
+            }
+        else
+            return false;
+        }    
+    
     public boolean addSejour(int numSejour, Date dateArrive, String lit, String phresponssable, Service service, Personnel auteur) {
         boolean j = false;
         //Sejour sejour= new Sejour();
@@ -88,7 +127,7 @@ public class Patient {
                 int i = state.executeUpdate();
                 if (i == 1) {
                     j = true;
-                    Sejour sejour = new Sejour(numSejour, dateArrive, phresponssable, auteur.getIdentifiant(), lit, service, nownow);
+                    Sejour sejour = new Sejour(numSejour, dateArrive, phresponssable, auteur.getId(), lit, service, nownow);
                     this.listeSejour.add(sejour);
                     setLocalisationService(service);
                     setHospitalise();

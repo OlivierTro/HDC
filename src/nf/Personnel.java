@@ -87,4 +87,32 @@ public class Personnel {
     public ArrayList<Patient> getListePatient() {
         return listePatients;
     }
+    
+     /**
+     * @param mdp the mdp to set
+     */
+    public void setMdp(String mdp) {
+        this.mdp = mdp;
+    }
+
+    /**
+     * @param statut the statut to set
+     */
+    public void setStatut(Fonction fonction) {
+        this.fonction = fonction;
+    }
+
+    /**
+     * @param nom the nom to set
+     */
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    /**
+     * @param prenom the prenom to set
+     */
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
 }
