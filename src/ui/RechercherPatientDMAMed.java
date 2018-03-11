@@ -5,17 +5,29 @@
  */
 package ui;
 
+import nf.Date;
+import nf.Personnel;
+
+
+
 /**
  *
  * @author ANNELAURE
  */
 public class RechercherPatientDMAMed extends javax.swing.JFrame {
+    
+    private Personnel utilisateur;
 
     /**
      * Creates new form RechercherPatientMedecin
      */
-    public RechercherPatientDMAMed() {
+    public RechercherPatientDMAMed(Personnel utilisateur) {
         initComponents();
+        this.setTitle("Rechercher un Patient");
+        this.setSize(1400,740);
+        this.utilisateur=utilisateur;
+        nomUt.setText(utilisateur.getNom());
+        fonctionUt.setText(utilisateur.getFonction().toString());
     }
 
     /**
@@ -416,10 +428,31 @@ public class RechercherPatientDMAMed extends javax.swing.JFrame {
         annee.setText("AAAA");
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
+    // méthode qui va récupperer le nom, prénom et date de naissance tapé et qui va les comparer avec la liste de patient de la personne connectée. Si le patient est trouvé, la page suivante s'affiche, sinon un message d'erreur est renvoyé.
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        AfficherInformationDMAMed info = new AfficherInformationDMAMed();
+        Date dateN= new Date(Integer.parseInt(jour.getText()),Integer.parseInt(mois.getText()),Integer.parseInt(annee.getText()));
+        String nomP=new String(nom.getText());
+        String prenomP = new String(prenom.getText());
+        int i =0;
+        boolean trouve=false;
+        while(i<utilisateur.getListePatient().size()&& trouve==false){
+            if(utilisateur.getListePatient().get(i).getNomUsuel().equals(nomP) &! utilisateur.getListePatient().get(i).getPrenom().equals(prenomP)  &! utilisateur.getListePatient().get(i).getDateNaissance().equals(dateN)){
+            i++;
+            }
+            else{
+                trouve=true;
+            }
+            
+        }
+        
+        if (i<utilisateur.getListePatient().size()){
+        AfficherInformationDMAMed info = new AfficherInformationDMAMed(utilisateur, utilisateur.getListePatient().get(i));
         info.setVisible(true);
         this.dispose();
+        }
+        else{
+            javax.swing.JOptionPane.showMessageDialog(null, "Ce patient n'existe pas");
+        }
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -429,7 +462,7 @@ public class RechercherPatientDMAMed extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        PageAccueilMed accueil = new PageAccueilMed();
+        PageAccueilMed accueil = new PageAccueilMed(utilisateur);
         accueil.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -437,38 +470,38 @@ public class RechercherPatientDMAMed extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RechercherPatientDMAMed.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RechercherPatientDMAMed.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RechercherPatientDMAMed.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RechercherPatientDMAMed.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new RechercherPatientDMAMed().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(RechercherPatientDMAMed.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(RechercherPatientDMAMed.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(RechercherPatientDMAMed.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(RechercherPatientDMAMed.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new RechercherPatientDMAMed().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField annee;

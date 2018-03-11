@@ -132,7 +132,7 @@ public enum TypeService {
             requete += " WHERE Service = ? ";
             requete += " AND fonction = ? ";
             requete += " OR fonction = ? ";
-            PreparedStatement state = ConnexionBD.getInstance().prepareStatement(requete);
+            PreparedStatement state = ConnBD.getInstance().prepareStatement(requete);
             state.setString(1, this.nom);
             state.setString(2, "ph");
             state.setString(3, "phChef");

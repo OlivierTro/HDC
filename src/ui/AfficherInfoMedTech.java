@@ -6,20 +6,45 @@
 
 package ui;
 
+import java.util.ArrayList;
+import nf.Fonction;
+import nf.Patient;
+import nf.Personnel;
+import nf.Service;
+
 /**
  *
  * @author ANNELAURE
  */
 public class AfficherInfoMedTech extends javax.swing.JFrame {
+    private Personnel utilisateur;
+    private Patient patient;
 
     /** Creates new form AfficherInfoMedTech */
-    public AfficherInfoMedTech() {
+    public AfficherInfoMedTech(Personnel utilisateur, Patient patient) {
         initComponents();
         this.setTitle("Prestations Médico-Techniques");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
-        this.setSize(960,680);
+        this.setSize(1400,740);
         texte.setEditable(false);
+        this.utilisateur=utilisateur;
+        this.patient=patient;
+        
+        //afficher le texte
+        int i=0;
+        String s="";
+        while (i < patient.getListeSejour().size()){
+            int j=0;
+            while (j<patient.getListeSejour().get(i).getListePrestation().size()){
+                if(patient.getListeSejour().get(i).getListePrestation().get(j).getService()==Service.MedicoTechnique){
+                    s +="- " + patient.getListeSejour().get(i).getListePrestation().get(j).getPrestation()+ "\n";
+                }
+                j++;
+            }
+            i++;
+        }
+        texte.setText(s);
     }
 
     /** This method is called from within the constructor to
@@ -171,7 +196,7 @@ public class AfficherInfoMedTech extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        AfficherInformationDMAMed afficher = new AfficherInformationDMAMed();
+        AfficherInformationDMAMed afficher = new AfficherInformationDMAMed(utilisateur, patient);
         afficher.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -179,37 +204,37 @@ public class AfficherInfoMedTech extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AfficherInfoMedTech.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AfficherInfoMedTech.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AfficherInfoMedTech.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AfficherInfoMedTech.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AfficherInfoMedTech().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(AfficherInfoMedTech.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(AfficherInfoMedTech.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(AfficherInfoMedTech.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(AfficherInfoMedTech.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new AfficherInfoMedTech().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel center;

@@ -235,7 +235,7 @@ public class AjouterSejour extends javax.swing.JFrame {
 
         jLabel4.setText("Localisation :");
 
-        jLabel5.setText("Patient");
+        jLabel5.setText("jLabel5");
 
         jLabel6.setText("Nom :");
 

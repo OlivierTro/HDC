@@ -5,17 +5,44 @@
  */
 package ui;
 
+import java.util.ArrayList;
+import nf.Fonction;
+import nf.Patient;
+import nf.Personnel;
+
 /**
  *
  * @author ANNELAURE
  */
 public class AfficherInformationDMAMed extends javax.swing.JFrame {
 
+    private Personnel utilisateur;
+    private Patient patient;
     /**
      * Creates new form AfficherInformationDMAMed
      */
-    public AfficherInformationDMAMed() {
+    public AfficherInformationDMAMed(Personnel utilisateur, Patient patient) {
         initComponents();
+        this.setTitle("Informations du DMA");
+        this.setSize(1400,740);
+        this.utilisateur=utilisateur;
+        this.patient=patient;
+        nomUt.setText(utilisateur.getNom());
+        fonctionUt.setText(utilisateur.getFonction().toString());
+        
+        //afficher tous les enseignements du patient
+        ipp.setText(patient.getIpp());
+        nom.setText(patient.getNomUsuel());
+        prenom.setText(patient.getPrenom());
+        dateNaissance.setText(patient.getDateNaissance().toStringN());
+        sexe.setText(patient.getSexe().getSexe());
+        nationalite.setText(patient.getNationalite());
+        adresse.setText(patient.getAdresse().toString());
+        nomMed.setText(patient.getMedecinG().getNom());
+        prenomMed.setText(patient.getMedecinG().getPrenom());
+        adresseMailMed.setText(patient.getMedecinG().getAdresseMail());
+        jLabel20.setText(String.valueOf(patient.getHospitalise()));
+        
     }
 
     /**
@@ -52,10 +79,6 @@ public class AfficherInformationDMAMed extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
@@ -68,10 +91,7 @@ public class AfficherInformationDMAMed extends javax.swing.JFrame {
         dateNaissance = new javax.swing.JLabel();
         sexe = new javax.swing.JLabel();
         nationalite = new javax.swing.JLabel();
-        ville = new javax.swing.JLabel();
-        codePostal = new javax.swing.JLabel();
-        voie = new javax.swing.JLabel();
-        numero = new javax.swing.JLabel();
+        adresse = new javax.swing.JLabel();
         nomMed = new javax.swing.JLabel();
         prenomMed = new javax.swing.JLabel();
         adresseMailMed = new javax.swing.JLabel();
@@ -251,14 +271,6 @@ public class AfficherInformationDMAMed extends javax.swing.JFrame {
 
         jLabel10.setText("Adresse :");
 
-        jLabel11.setText("Ville :");
-
-        jLabel12.setText("Code Postal :");
-
-        jLabel13.setText("Voie :");
-
-        jLabel14.setText("Numéro :");
-
         jLabel15.setText("Medecin Généraliste :");
 
         jLabel16.setText("Nom :");
@@ -283,13 +295,7 @@ public class AfficherInformationDMAMed extends javax.swing.JFrame {
 
         nationalite.setText("jLabel2");
 
-        ville.setText("jLabel2");
-
-        codePostal.setText("jLabel2");
-
-        voie.setText("jLabel2");
-
-        numero.setText("jLabel2");
+        adresse.setText("jLabel2");
 
         nomMed.setText("jLabel2");
 
@@ -336,24 +342,22 @@ public class AfficherInformationDMAMed extends javax.swing.JFrame {
                             .addComponent(jLabel9)
                             .addComponent(jLabel10)
                             .addComponent(jLabel15))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel18)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel14)
-                            .addComponent(jLabel16)
-                            .addComponent(jLabel17))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ville)
-                            .addComponent(codePostal)
-                            .addComponent(voie)
-                            .addComponent(numero)
-                            .addComponent(nomMed)
-                            .addComponent(prenomMed)
-                            .addComponent(adresseMailMed)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel18)
+                                    .addComponent(jLabel16)
+                                    .addComponent(jLabel17))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nomMed)
+                                    .addComponent(prenomMed)
+                                    .addComponent(adresseMailMed)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(adresse)
+                                .addGap(85, 85, 85))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(131, 131, 131)
                         .addComponent(nationalite))
@@ -416,21 +420,8 @@ public class AfficherInformationDMAMed extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jLabel11)
-                    .addComponent(ville))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(codePostal))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(voie))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(numero))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(adresse))
+                .addGap(66, 66, 66)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(jLabel16)
@@ -483,19 +474,19 @@ public class AfficherInformationDMAMed extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        AfficherInfoMedTech infoMedTech = new AfficherInfoMedTech();
+        AfficherInfoMedTech infoMedTech = new AfficherInfoMedTech(utilisateur, patient);
         infoMedTech.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        AfficherObservation observation = new AfficherObservation();
+        AfficherObservation observation = new AfficherObservation(utilisateur, patient);
         observation.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        AfficherPrestationsInf prestation = new AfficherPrestationsInf();
+        AfficherPrestationsInf prestation = new AfficherPrestationsInf(utilisateur, patient);
         prestation.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jToggleButton1ActionPerformed
@@ -507,7 +498,7 @@ public class AfficherInformationDMAMed extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        PageAccueilMed accueil = new PageAccueilMed();
+        PageAccueilMed accueil = new PageAccueilMed(utilisateur);
         accueil.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -515,42 +506,42 @@ public class AfficherInformationDMAMed extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AfficherInformationDMAMed.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AfficherInformationDMAMed.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AfficherInformationDMAMed.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AfficherInformationDMAMed.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AfficherInformationDMAMed().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(AfficherInformationDMAMed.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(AfficherInformationDMAMed.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(AfficherInformationDMAMed.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(AfficherInformationDMAMed.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new AfficherInformationDMAMed().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel adresse;
     private javax.swing.JLabel adresseMailMed;
     private javax.swing.JPanel center;
-    private javax.swing.JLabel codePostal;
     private javax.swing.JLabel dateNaissance;
     private javax.swing.JPanel east2;
     private javax.swing.JLabel fonctionUt;
@@ -561,10 +552,6 @@ public class AfficherInformationDMAMed extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -591,14 +578,11 @@ public class AfficherInformationDMAMed extends javax.swing.JFrame {
     private javax.swing.JLabel nomUt;
     private javax.swing.JPanel north;
     private javax.swing.JPanel north2;
-    private javax.swing.JLabel numero;
     private javax.swing.JLabel prenom;
     private javax.swing.JLabel prenomMed;
     private javax.swing.JLabel sexe;
     private javax.swing.JPanel south;
     private javax.swing.JPanel south2;
-    private javax.swing.JLabel ville;
-    private javax.swing.JLabel voie;
     private javax.swing.JPanel west2;
     // End of variables declaration//GEN-END:variables
 }

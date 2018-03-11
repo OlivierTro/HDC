@@ -15,7 +15,7 @@ public class Adresse {
     private String voie;
     private int numero;
     
-    private Adresse(String ville, int codePostal, String voie, int numero){
+    public Adresse(String ville, int codePostal, String voie, int numero){
         this.ville=ville;
         this.codePostal=codePostal;
         this.voie=voie;

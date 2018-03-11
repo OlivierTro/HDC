@@ -92,7 +92,7 @@ public class Personnel {
      * @param mdp the mdp to set
      */
     public void setMdp(String mdp) {
-        this.motDePasse = mdp;
+        this.mdp = mdp;
     }
 
     /**

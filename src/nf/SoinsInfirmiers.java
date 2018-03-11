@@ -80,5 +80,15 @@ public class SoinsInfirmiers {
         this.dateRealSoins = dateRealSoins;
     }
     
+    // affiche un soins infirmier
+    public String afficherSoinsInf() {
+        String s = "Date du soins " + dateRealSoins.toString() + "\n"
+                + "\t" + "Nom du soins : " + nomSoins + "\n"
+                + "\t" + "Description : " + description + "\n"
+                + "\t" + "Auteur :" + auteur + "\n"
+                + "\t" + "Date édition :" + dateEdition + "\n";
+        return s;
+    }
+    
     
 }
