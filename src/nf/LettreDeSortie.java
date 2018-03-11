@@ -10,12 +10,12 @@ package nf;
  * @author Pauline
  */
 public class LettreDeSortie {
-    private Personnel auteur;
-    private Date delivrance;
+    private String auteur;
+    private java.util.Date delivrance;
     private String diagnostic;
     private String traitement;
     
-    public LettreDeSortie(Personnel auteur, Date delivrance, String diagnostic, String traitement){
+    public LettreDeSortie(String auteur, java.util.Date delivrance, String diagnostic, String traitement){
         this.auteur = auteur;
         this.delivrance = delivrance;
         this.diagnostic = diagnostic;
@@ -33,28 +33,28 @@ public class LettreDeSortie {
     /**
      * @return the auteur
      */
-    public Personnel getAuteur() {
+    public String getAuteur() {
         return auteur;
     }
 
     /**
      * @param auteur the auteur to set
      */
-    public void setAuteur(Personnel auteur) {
+    public void setAuteur(String auteur) {
         this.auteur = auteur;
     }
 
     /**
      * @return the delivrance
      */
-    public Date getDelivrance() {
+    public java.util.Date getDelivrance() {
         return delivrance;
     }
 
     /**
      * @param delivrance the delivrance to set
      */
-    public void setDelivrance(Date delivrance) {
+    public void setDelivrance(java.util.Date delivrance) {
         this.delivrance = delivrance;
     }
 

@@ -17,14 +17,14 @@ public class Sejour {
     private Date dateSortie;
     private String numeroDeLit;
     private String nomPH;
-    private String lettreSortie;
+    private LettreDeSortie lettreSortie;
     private ArrayList<Prestation> listePrestation=new ArrayList<Prestation>();
     private ArrayList<Observation> listeObs=new ArrayList<Observation>();
     private ArrayList<SoinsInfirmiers> listeSoinsInf=new ArrayList<SoinsInfirmiers>();
     private ArrayList<String> listePrescription = new ArrayList<String>();
     
     //dma
-    public Sejour(String numeroSejour, Date dateArrivee, Date dateSortie, String nomPH, String lettreSortie, ArrayList<String> listePrescription){
+    public Sejour(String numeroSejour, Date dateArrivee, Date dateSortie, String nomPH, LettreDeSortie lettreSortie, ArrayList<String> listePrescription){
         this.numSejour=numSejour;
         this.dateArrivee=dateArrivee;
         this.dateSortie=dateSortie;
@@ -89,5 +89,23 @@ public class Sejour {
     
     public void ajouterObs(Observation observation){
         listeObs.add(observation);
+    }
+    
+     public void ajouterPrestation(Prestation p){
+        listePrestation.add(p);
+    }
+
+    /**
+     * @return the lettreSortie
+     */
+    public LettreDeSortie getLettreSortie() {
+        return lettreSortie;
+    }
+
+    /**
+     * @param lettreSortie the lettreSortie to set
+     */
+    public void setLettreSortie(LettreDeSortie lettreSortie) {
+        this.lettreSortie = lettreSortie;
     }
 }
