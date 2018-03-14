@@ -16,7 +16,6 @@ import java.sql.SQLException;
  * @author ANNELAURE
  */
 public class Prestation {
-
     private String nomPrestation;
     private java.util.Date dateD;
     private java.util.Date dateR;
@@ -25,30 +24,28 @@ public class Prestation {
     private String resultat;
     private String prestation;
     private Service service;
-    private Sejour sejour;
-    private TypeSejour type;
-
-    public Prestation(String prestation) {
-        this.prestation = prestation;
+    
+    public Prestation(String prestation){
+        this.prestation=prestation;
     }
-
-    public Prestation(String nomPrestation, java.util.Date dateD, String auteurD, String prestation, Service service) {
-        this.nomPrestation = nomPrestation;
-        this.dateD = dateD;
-        this.auteurD = auteurD;
-        this.prestation = prestation;
-        this.service = service;
+    
+    public Prestation(String nomPrestation, java.util.Date dateD, String auteurD, String prestation, Service service){
+        this.nomPrestation=nomPrestation;
+        this.dateD=dateD;
+        this.auteurD=auteurD;
+        this.prestation=prestation;
+        this.service=service;
     }
-
-    public Prestation(String nomPrestation, java.util.Date dateD, java.util.Date dateR, String auteurD, String auteurR, String resultat, String prestation, Service service) {
-        this.nomPrestation = nomPrestation;
-        this.dateD = dateD;
-        this.dateR = dateR;
-        this.auteurD = auteurD;
-        this.auteurR = auteurR;
-        this.resultat = resultat;
-        this.prestation = prestation;
-        this.service = service;
+    
+    public Prestation(String nomPrestation, java.util.Date dateD, java.util.Date dateR, String auteurD, String auteurR, String resultat, String prestation, Service service){
+        this.nomPrestation=nomPrestation;
+        this.dateD=dateD;
+        this.dateR=dateR;
+        this.auteurD=auteurD;
+        this.auteurR=auteurR;
+        this.resultat=resultat;
+        this.prestation=prestation;
+        this.service=service;
     }
 
     public void ajouterResultat(Sejour sejour, String resultat, String auteurR) {
@@ -56,18 +53,17 @@ public class Prestation {
         this.auteurR = auteurR;
         java.util.Date now = new java.util.Date();
         this.dateR = now.getTime();
-        boolean j = false;
-        try {
+        boolean j=false;
+         try {
             String requete = "UPDATE prestation SET resultat = ? , dateresultat = ? , auteurresultat = ? ";
             requete += " WHERE numsejour= ? ";
             requete += " AND datedemande= ? ";
             PreparedStatement state = ConnexionBD.getInstance().prepareStatement(requete);
-            state.setString(1, resultat);
-            state.setDate(2, this.dateR);
-            state.setString(3, auteurR);
-            state.setString(4, sejour.getNumSejour());
-            state.setDate5,this.dateD
-            );
+            state.setString(1,resultat);
+            state.setDate(2,this.dateR);
+            state.setString(3,auteurR);
+            state.setString(4,sejour.getNumSejour());
+            state.setDate5,this.dateD);
             int i = state.executeUpdate();
             if (i == 1) {
                 j = true;
@@ -78,7 +74,7 @@ public class Prestation {
             e.printStackTrace();
         }
     }
-
+    
     /**
      * @return the nomPrestation
      */
@@ -105,10 +101,6 @@ public class Prestation {
      */
     public String getAuteurD() {
         return auteurD;
-    }
-
-    public Sejour getSejour() {
-        return sejour;
     }
 
     /**
@@ -138,20 +130,25 @@ public class Prestation {
     public Service getService() {
         return service;
     }
-    
-    public TypeSejour getType() {
-        return type;
-    }
+
 
     //verifier que la prescription a été réalisée; donc si elle a un resultat.
-    public boolean pRealisee() {
+    public boolean pRealisee(){
         boolean r;
-        if (this.resultat == null) {
-            r = false;
-        } else {
-            r = true;
+        if(this.resultat==null){
+            r=false;
+        }
+        else{
+            r=true;
         }
         return r;
     }
-
+    
+    public String afficherPresDMA(){
+        String s=new String("");
+        s= "- " + nomPrestation + "\n";
+        return s;
+    }
+    
 }
+
