@@ -6,6 +6,7 @@
 package nf;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -16,7 +17,7 @@ public class Sejour {
     private Date dateArrivee;
     private Date dateSortie;
     private String numeroDeLit;
-    private String nomPH;
+    private PraticienHospitalier PH;
     private LettreDeSortie lettreSortie;
     private ArrayList<Prestation> listePrestation=new ArrayList<Prestation>();
     private ArrayList<Observation> listeObs=new ArrayList<Observation>();
@@ -24,11 +25,11 @@ public class Sejour {
     private ArrayList<String> listePrescription = new ArrayList<String>();
     
     //dma
-    public Sejour(String numeroSejour, Date dateArrivee, Date dateSortie, String nomPH, LettreDeSortie lettreSortie, ArrayList<String> listePrescription){
+    public Sejour(String numeroSejour, Date dateArrivee, Date dateSortie, PraticienHospitalier nomPH, LettreDeSortie lettreSortie, ArrayList<String> listePrescription){
         this.numSejour=numSejour;
         this.dateArrivee=dateArrivee;
         this.dateSortie=dateSortie;
-        this.nomPH=nomPH;
+        this.PH=nomPH;
         this.lettreSortie=lettreSortie;
         int i=0;
         while(i<this.listePrestation.size()){
@@ -98,7 +99,6 @@ public class Sejour {
     public LettreDeSortie getLettreSortie() {
         return lettreSortie;
     }
-
     
     public void setLettreSortie(LettreDeSortie lettreSortie) {
         this.lettreSortie = lettreSortie;
