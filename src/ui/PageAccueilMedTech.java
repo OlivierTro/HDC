@@ -119,16 +119,16 @@ public class PageAccueilMedTech extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Ajouter un Séjour");
+        jLabel1.setText("Accueil");
 
         javax.swing.GroupLayout northLayout = new javax.swing.GroupLayout(north);
         north.setLayout(northLayout);
         northLayout.setHorizontalGroup(
             northLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(northLayout.createSequentialGroup()
-                .addContainerGap(345, Short.MAX_VALUE)
+                .addContainerGap(408, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(344, Short.MAX_VALUE))
+                .addContainerGap(407, Short.MAX_VALUE))
         );
         northLayout.setVerticalGroup(
             northLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,6 +233,9 @@ public class PageAccueilMedTech extends javax.swing.JFrame {
                     .addComponent(jButton4))
                 .addContainerGap(101, Short.MAX_VALUE))
         );
+
+        centrer2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton1, jButton4});
+
         centrer2Layout.setVerticalGroup(
             centrer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(centrer2Layout.createSequentialGroup()

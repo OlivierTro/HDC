@@ -15,12 +15,12 @@ import nf.Personnel;
  */
 public class RechercherPatient extends javax.swing.JFrame {
     private Personnel utilisateur;
-    private Patient patient;
+    
     
     /**
      * Creates new form RechercherPatient
      */
-    public RechercherPatient(Personnel personnel, Patient patient) {
+    public RechercherPatient(Personnel personnel) {
         initComponents();
         this.setTitle("Rechercher un Patient");
         this.setSize(1400,740);
@@ -447,7 +447,7 @@ public class RechercherPatient extends javax.swing.JFrame {
         int i =0;
         boolean trouve=false;
         while(i<utilisateur.getListePatient().size()&& trouve==false){
-            if(utilisateur.getListePatient().get(i).getNomUsuel().equals(nomP) &! utilisateur.getListePatient().get(i).getPrenom().equals(prenomP)  &! utilisateur.getListePatient().get(i).getDateNaissance().equals(dateN)){
+            if(! utilisateur.getListePatient().get(i).getNomUsuel().equals(nomP) &! utilisateur.getListePatient().get(i).getPrenom().equals(prenomP)  &! utilisateur.getListePatient().get(i).getDateNaissance().equals(dateN)){
             i++;
             }
             else{

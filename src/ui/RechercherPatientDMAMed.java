@@ -436,7 +436,7 @@ public class RechercherPatientDMAMed extends javax.swing.JFrame {
         int i =0;
         boolean trouve=false;
         while(i<utilisateur.getListePatient().size()&& trouve==false){
-            if(utilisateur.getListePatient().get(i).getNomUsuel().equals(nomP) &! utilisateur.getListePatient().get(i).getPrenom().equals(prenomP)  &! utilisateur.getListePatient().get(i).getDateNaissance().equals(dateN)){
+            if(! utilisateur.getListePatient().get(i).getNomUsuel().equals(nomP) &! utilisateur.getListePatient().get(i).getPrenom().equals(prenomP)  &! utilisateur.getListePatient().get(i).getDateNaissance().equals(dateN)){
             i++;
             }
             else{

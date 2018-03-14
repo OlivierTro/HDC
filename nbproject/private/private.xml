@@ -11,6 +11,7 @@
             <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/nf/Sejour.java</file>
             <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/ui/PageAccueilMed.java</file>
             <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/ui/Head-physician-icon.png</file>
+            <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/nf/Service.java</file>
             <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/nf/Prestation.java</file>
             <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/ui/RechercherPatientInfoMed.java</file>
             <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/ui/PageAccueilSec.java</file>
@@ -28,7 +29,9 @@
             <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/ui/AfficherInformationDMAMed.java</file>
             <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/ui/AjouterResultatMedTech.java</file>
             <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/ui/RechercherPatientMedTech.java</file>
+            <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/nf/Date.java</file>
             <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/nf/ConnexionBD.java</file>
+            <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/nf/Adresse.java</file>
             <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/ui/AjouterLettreSortie.java</file>
             <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/nf/Patient.java</file>
             <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/ui/AjouterSejour.java</file>

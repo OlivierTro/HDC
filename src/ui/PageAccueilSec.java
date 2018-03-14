@@ -120,16 +120,16 @@ public class PageAccueilSec extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Ajouter un Séjour");
+        jLabel1.setText("Accueil");
 
         javax.swing.GroupLayout northLayout = new javax.swing.GroupLayout(north);
         north.setLayout(northLayout);
         northLayout.setHorizontalGroup(
             northLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(northLayout.createSequentialGroup()
-                .addContainerGap(402, Short.MAX_VALUE)
+                .addContainerGap(465, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(402, Short.MAX_VALUE))
+                .addContainerGap(465, Short.MAX_VALUE))
         );
         northLayout.setVerticalGroup(
             northLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,15 +234,13 @@ public class PageAccueilSec extends javax.swing.JFrame {
         centrer2Layout.setHorizontalGroup(
             centrer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(centrer2Layout.createSequentialGroup()
-                .addContainerGap(329, Short.MAX_VALUE)
-                .addComponent(jButton5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, centrer2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(centrer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel2)
-                    .addComponent(jButton1)
-                    .addComponent(jButton4))
+                .addGroup(centrer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton5)
+                    .addGroup(centrer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                        .addComponent(jLabel2)
+                        .addComponent(jButton1)
+                        .addComponent(jButton4)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         centrer2Layout.setVerticalGroup(
@@ -290,7 +288,7 @@ public class PageAccueilSec extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        RechercherPatient rechercher = new RechercherPatient();
+        RechercherPatient rechercher = new RechercherPatient(utilisateur);
         rechercher.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -302,7 +300,7 @@ public class PageAccueilSec extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        AjouterSejour ajouter= new AjouterSejour();
+        AjouterSejour ajouter= new AjouterSejour(utilisateur);
         ajouter.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed

@@ -154,7 +154,7 @@ public class Patient {
             requete += " WHERE ipp= ? ";
             PreparedStatement state = ConnexionBD.getInstance().prepareStatement(requete);
             state.setInt(1, 1);
-            state.setInt(2, this.ipp);
+            state.setString(2, this.ipp);
             state.executeUpdate();
             state.close();
 
@@ -207,7 +207,7 @@ public class Patient {
             String requete = "SELECT * FROM sejour";
             requete += " WHERE ipp= ? ";
             PreparedStatement state = ConnexionBD.getInstance().prepareStatement(requete);
-            state.setInt(1, this.ipp);
+            state.setString(1, this.ipp);
             state.execute();
             ResultSet res = state.getResultSet();
             while (res.next()) {
@@ -238,7 +238,7 @@ public class Patient {
             requete += " WHERE ipp = ? ";
             PreparedStatement state = ConnexionBD.getInstance().prepareStatement(requete);
             state.setString(1, service.toString());
-            state.setInt(2, this.ipp);
+            state.setString(2, this.ipp);
             int i = state.executeUpdate();
             if (i == 1) {
                 j = true;
@@ -326,12 +326,12 @@ public class Patient {
             ResultSet res = state.getResultSet();
             res.next();
             if (res.getString("localisationservice") == null) {
-                p = new Patient(res.getInt("ipp"), res.getString("nomusuel"), res.getString("nomdenaissance"), res.getString("prenom"), res.getString("nationalite"), Sexe.valueOf(res.getString("sexe")), res.getDate("datedenaissance"),
-                        new Adresse(res.getString("ville"), res.getInt("codepostal"), res.getInt("numadresse"), res.getString("nomrue")), res.getString("medecingeneraliste"), null, res.getInt("hospitalise"), res.getTimestamp("dateedition"));
+                p = new Patient(res.getString("ipp"), res.getString("nomusuel"), res.getString("nomdenaissance"), res.getString("prenom"), res.getString("nationalite"), Sexe.valueOf(res.getString("sexe")), res.getDate("datedenaissance"),
+                        new Adresse(res.getString("ville"), res.getInt("codepostal"), res.getString("nomrue"), res.getInt("numadresse")), res.getString("medecingeneraliste"), null, res.getInt("hospitalise"), res.getTimestamp("dateedition"));
 
             } else {
-                p = new Patient(res.getInt("ipp"), res.getString("nomusuel"), res.getString("nomdenaissance"), res.getString("prenom"), res.getString("nationalite"), Sexe.valueOf(res.getString("sexe")), res.getDate("datedenaissance"),
-                        new Adresse(res.getString("ville"), res.getInt("codepostal"), res.getInt("numadresse"), res.getString("nomrue")), res.getString("medecingeneraliste"), Service.valueOf(res.getString("localisationservice")), res.getInt("hospitalise"), res.getTimestamp("dateedition"));
+                p = new Patient(res.getString("ipp"), res.getString("nomusuel"), res.getString("nomdenaissance"), res.getString("prenom"), res.getString("nationalite"), Sexe.valueOf(res.getString("sexe")), res.getDate("datedenaissance"),
+                        new Adresse(res.getString("ville"), res.getInt("codepostal"), res.getString("nomrue"),res.getInt("numadresse")), res.getString("medecingeneraliste"), Service.valueOf(res.getString("localisationservice")), res.getInt("hospitalise"), res.getTimestamp("dateedition"));
             }
             res.close();
             state.close();
@@ -372,6 +372,9 @@ public class Patient {
     public ArrayList<Sejour> getListeSejour(){
         return listeSejour;
     }
-
-
+    
+    //ajoute un sejour
+    public void ajouterSejour(Sejour sejour){
+        listeSejour.add(sejour);
+    }
 }

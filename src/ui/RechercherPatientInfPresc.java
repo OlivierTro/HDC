@@ -5,7 +5,7 @@
  */
 package ui;
 
-import nf.Observation;
+import nf.Date;
 import nf.Patient;
 import nf.Personnel;
 
@@ -13,19 +13,18 @@ import nf.Personnel;
  *
  * @author ANNELAURE
  */
-public class InfosMedecin extends javax.swing.JFrame {
+public class RechercherPatientInfPresc extends javax.swing.JFrame {
     private Personnel utilisateur;
-    private Patient patient;
-
+    
+    
     /**
      * Creates new form RechercherPatient
      */
-    public InfosMedecin(Personnel utilisateur, Patient patient) {
+    public RechercherPatientInfPresc(Personnel personnel) {
         initComponents();
-        this.setTitle("Ajouter une information");
+        this.setTitle("Rechercher un Patient");
         this.setSize(1400,740);
         this.utilisateur=utilisateur;
-        this.patient=patient;
         nomUt.setText(utilisateur.getNom());
         fonctionUt.setText(utilisateur.getFonction().toString());
     }
@@ -56,9 +55,18 @@ public class InfosMedecin extends javax.swing.JFrame {
         north2 = new javax.swing.JPanel();
         south2 = new javax.swing.JPanel();
         centrer2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        nom = new javax.swing.JTextField();
+        prenom = new javax.swing.JTextField();
+        jour = new javax.swing.JTextField();
+        mois = new javax.swing.JTextField();
+        annee = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jToggleButton1 = new javax.swing.JToggleButton();
         jToggleButton2 = new javax.swing.JToggleButton();
-        jToggleButton3 = new javax.swing.JToggleButton();
         south = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -73,9 +81,9 @@ public class InfosMedecin extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
-        nomUt.setText("jLabel2");
+        nomUt.setText("jLabel7");
 
-        fonctionUt.setText("jLabel2");
+        fonctionUt.setText("jLabel7");
 
         jButton1.setText("Déconnexion");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -109,17 +117,18 @@ public class InfosMedecin extends javax.swing.JFrame {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(nomUt)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(fonctionUt))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(nomUt)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fonctionUt)))
-                .addContainerGap(33, Short.MAX_VALUE))
+                        .addComponent(jButton2)))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel4, java.awt.BorderLayout.CENTER);
@@ -132,16 +141,16 @@ public class InfosMedecin extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Ajouter une information");
+        jLabel1.setText("Rechercher un Patient");
 
         javax.swing.GroupLayout northLayout = new javax.swing.GroupLayout(north);
         north.setLayout(northLayout);
         northLayout.setHorizontalGroup(
             northLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(northLayout.createSequentialGroup()
-                .addContainerGap(315, Short.MAX_VALUE)
+                .addContainerGap(326, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(315, Short.MAX_VALUE))
+                .addContainerGap(326, Short.MAX_VALUE))
         );
         northLayout.setVerticalGroup(
             northLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,24 +227,77 @@ public class InfosMedecin extends javax.swing.JFrame {
         centrer2.setBackground(new java.awt.Color(255, 255, 255));
         centrer2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0), 2));
 
-        jToggleButton1.setText("Ajouter une observation");
+        jLabel2.setText("Nom patient");
+
+        jLabel3.setText("Prénom patient");
+
+        jLabel4.setText("Date de naissance patient");
+
+        nom.setText("Nom");
+        nom.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                nomFocusGained(evt);
+            }
+        });
+
+        prenom.setText("Prénom");
+        prenom.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                prenomFocusGained(evt);
+            }
+        });
+
+        jour.setText("JJ");
+        jour.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jourFocusGained(evt);
+            }
+        });
+        jour.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jourKeyTyped(evt);
+            }
+        });
+
+        mois.setText("MM");
+        mois.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                moisFocusGained(evt);
+            }
+        });
+        mois.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                moisKeyTyped(evt);
+            }
+        });
+
+        annee.setText("AAAA");
+        annee.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                anneeFocusGained(evt);
+            }
+        });
+        annee.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                anneeKeyTyped(evt);
+            }
+        });
+
+        jLabel5.setText("/");
+
+        jLabel6.setText("/");
+
+        jToggleButton1.setText("Choisir la prescription à valider");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton1ActionPerformed(evt);
             }
         });
 
-        jToggleButton2.setText("Ajouter une prescription");
+        jToggleButton2.setText("Cancel");
         jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton2ActionPerformed(evt);
-            }
-        });
-
-        jToggleButton3.setText("Ajouter une lettre de sortie");
-        jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton3ActionPerformed(evt);
             }
         });
 
@@ -244,24 +306,56 @@ public class InfosMedecin extends javax.swing.JFrame {
         centrer2Layout.setHorizontalGroup(
             centrer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(centrer2Layout.createSequentialGroup()
-                .addContainerGap(105, Short.MAX_VALUE)
-                .addGroup(centrer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jToggleButton3)
-                    .addGroup(centrer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-                        .addComponent(jToggleButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addContainerGap(118, Short.MAX_VALUE)
+                .addGroup(centrer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel2)
+                    .addComponent(nom)
+                    .addComponent(jLabel3)
+                    .addComponent(prenom, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                    .addComponent(jLabel4)
+                    .addGroup(centrer2Layout.createSequentialGroup()
+                        .addComponent(jour, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(mois, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(annee, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(116, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, centrer2Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jToggleButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jToggleButton1)
+                .addGap(28, 28, 28))
         );
         centrer2Layout.setVerticalGroup(
             centrer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(centrer2Layout.createSequentialGroup()
-                .addGap(124, 124, 124)
-                .addComponent(jToggleButton1)
-                .addGap(75, 75, 75)
-                .addComponent(jToggleButton2)
-                .addGap(75, 75, 75)
-                .addComponent(jToggleButton3)
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addGap(34, 34, 34)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(nom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(prenom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addGroup(centrer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(mois, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(annee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                .addGroup(centrer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jToggleButton1)
+                    .addComponent(jToggleButton2))
+                .addGap(94, 94, 94))
         );
 
         center.add(centrer2, java.awt.BorderLayout.CENTER);
@@ -288,23 +382,51 @@ public class InfosMedecin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        AjouterObservation obs = new AjouterObservation(utilisateur,patient);
-        obs.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+    private void prenomFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_prenomFocusGained
+        prenom.setText("");
+    }//GEN-LAST:event_prenomFocusGained
+
+    private void nomFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nomFocusGained
+        nom.setText("");
+    }//GEN-LAST:event_nomFocusGained
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
-        AjouterPrescription prescription = new AjouterPrescription();
-        prescription.setVisible(true);
-        this.dispose();
+        nom.setText("Nom");
+        prenom.setText("Prénom");
+        jour.setText("JJ");
+        mois.setText("MM");
+        annee.setText("AAAA");
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
-    private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
-        AjouterLettreSortie lds = new AjouterLettreSortie(utilisateur, patient);
-        lds.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jToggleButton3ActionPerformed
+    private void jourFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jourFocusGained
+        jour.setText("");
+    }//GEN-LAST:event_jourFocusGained
+
+    private void moisFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_moisFocusGained
+        mois.setText("");
+    }//GEN-LAST:event_moisFocusGained
+
+    private void anneeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_anneeFocusGained
+        annee.setText("");
+    }//GEN-LAST:event_anneeFocusGained
+
+    private void jourKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jourKeyTyped
+        if (jour.getText().length() == 1) {
+            mois.requestFocus();
+        }
+    }//GEN-LAST:event_jourKeyTyped
+
+    private void moisKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_moisKeyTyped
+        if (mois.getText().length() == 1) {
+            annee.requestFocus();
+        }
+    }//GEN-LAST:event_moisKeyTyped
+
+    private void anneeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_anneeKeyTyped
+        if (annee.getText().length() == 3) {
+            jToggleButton1.requestFocus();
+        }
+    }//GEN-LAST:event_anneeKeyTyped
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         PageConnexion connex =new PageConnexion();
@@ -313,11 +435,36 @@ public class InfosMedecin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        PageAccueilMed pageAccueil = new PageAccueilMed(utilisateur);
-        pageAccueil.setVisible(true);
+        PageAccueilInf accueil = new PageAccueilInf(utilisateur);
+        accueil.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
-       
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        Date dateN= new Date(Integer.parseInt(jour.getText()),Integer.parseInt(mois.getText()),Integer.parseInt(annee.getText()));
+        String nomP=new String(nom.getText());
+        String prenomP = new String(prenom.getText());
+        int i =0;
+        boolean trouve=false;
+        while(i<utilisateur.getListePatient().size()&& trouve==false){
+            if(! utilisateur.getListePatient().get(i).getNomUsuel().equals(nomP) &! utilisateur.getListePatient().get(i).getPrenom().equals(prenomP)  &! utilisateur.getListePatient().get(i).getDateNaissance().equals(dateN)){
+            i++;
+            }
+            else{
+                trouve=true;
+            }
+            
+        }
+        if (i<utilisateur.getListePatient().size()){
+        ValiderPrescriptionInf valider = new ValiderPrescriptionInf(utilisateur,utilisateur.getListePatient().get(i));
+        valider.setVisible(true);
+        this.dispose();
+        }
+        else{
+            javax.swing.JOptionPane.showMessageDialog(null, "Ce patient n'existe pas");
+        }
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -335,26 +482,26 @@ public class InfosMedecin extends javax.swing.JFrame {
 //                }
 //            }
 //        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(InfosMedecin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(RechercherPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(InfosMedecin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(RechercherPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(InfosMedecin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(RechercherPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(InfosMedecin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(RechercherPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
-//        //</editor-fold>
 //        //</editor-fold>
 //
 //        /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
-//                new InfosMedecin().setVisible(true);
+//                new RechercherPatient().setVisible(true);
 //            }
 //        });
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField annee;
     private javax.swing.JPanel center;
     private javax.swing.JPanel centrer2;
     private javax.swing.JPanel east2;
@@ -362,17 +509,25 @@ public class InfosMedecin extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton2;
-    private javax.swing.JToggleButton jToggleButton3;
+    private javax.swing.JTextField jour;
+    private javax.swing.JTextField mois;
+    private javax.swing.JTextField nom;
     private javax.swing.JLabel nomUt;
     private javax.swing.JPanel north;
     private javax.swing.JPanel north2;
+    private javax.swing.JTextField prenom;
     private javax.swing.JPanel south;
     private javax.swing.JPanel south2;
     private javax.swing.JPanel west2;

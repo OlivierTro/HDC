@@ -5,11 +5,9 @@
  */
 package nf;
 
-import java.sql.Timestamp;
-import java.sql.Date;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
 
 /**
  *
@@ -51,7 +49,7 @@ public class Prestation {
     public void ajouterResultat(Sejour sejour, String resultat, String auteurR) {
         this.resultat = resultat;
         this.auteurR = auteurR;
-        java.util.Date now = new java.util.Date();
+        Calendar now = new Calendar();
         this.dateR = now.getTime();
         boolean j=false;
          try {
@@ -60,10 +58,10 @@ public class Prestation {
             requete += " AND datedemande= ? ";
             PreparedStatement state = ConnexionBD.getInstance().prepareStatement(requete);
             state.setString(1,resultat);
-            state.setDate(2,this.dateR);
+            state.toString(2,this.dateR);
             state.setString(3,auteurR);
             state.setString(4,sejour.getNumSejour());
-            state.setDate5,this.dateD);
+            state.setDate(this.dateD);
             int i = state.executeUpdate();
             if (i == 1) {
                 j = true;

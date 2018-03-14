@@ -46,6 +46,13 @@ public class Sejour {
         this.listeSoinsInf=listeSoinsInf;
     }
     
+     //dm anesthésie et medico-technique
+    public Sejour(String numSejour, Date dateArrivee, String nomPH){
+        this.numSejour=numSejour;
+        this.dateArrivee=dateArrivee;
+        this.nomPH=nomPH;
+    }
+    
     //dm anesthésie et medico-technique
     public Sejour(ArrayList<Observation> listeObs, ArrayList<Prestation> listePrestation){
         this.listeObs=listeObs;
@@ -91,21 +98,17 @@ public class Sejour {
         listeObs.add(observation);
     }
     
-     public void ajouterPrestation(Prestation p){
+    public void ajouterPrestation(Prestation p){
         listePrestation.add(p);
     }
 
-    /**
-     * @return the lettreSortie
-     */
     public LettreDeSortie getLettreSortie() {
         return lettreSortie;
     }
 
-    /**
-     * @param lettreSortie the lettreSortie to set
-     */
+    
     public void setLettreSortie(LettreDeSortie lettreSortie) {
         this.lettreSortie = lettreSortie;
     }
+
 }

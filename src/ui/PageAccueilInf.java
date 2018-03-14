@@ -5,27 +5,23 @@
  */
 package ui;
 
-import nf.Observation;
-import nf.Patient;
 import nf.Personnel;
 
 /**
  *
  * @author ANNELAURE
  */
-public class InfosMedecin extends javax.swing.JFrame {
-    private Personnel utilisateur;
-    private Patient patient;
+public class PageAccueilInf extends javax.swing.JFrame {
 
+    private Personnel utilisateur;
     /**
-     * Creates new form RechercherPatient
+     * Creates new form AccueilInf
      */
-    public InfosMedecin(Personnel utilisateur, Patient patient) {
+    public PageAccueilInf(Personnel utilisateur) {
         initComponents();
-        this.setTitle("Ajouter une information");
+        this.setTitle("Accueil");
         this.setSize(1400,740);
         this.utilisateur=utilisateur;
-        this.patient=patient;
         nomUt.setText(utilisateur.getNom());
         fonctionUt.setText(utilisateur.getFonction().toString());
     }
@@ -45,7 +41,6 @@ public class InfosMedecin extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         nomUt = new javax.swing.JLabel();
         fonctionUt = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         north = new javax.swing.JPanel();
@@ -56,9 +51,9 @@ public class InfosMedecin extends javax.swing.JFrame {
         north2 = new javax.swing.JPanel();
         south2 = new javax.swing.JPanel();
         centrer2 = new javax.swing.JPanel();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jToggleButton2 = new javax.swing.JToggleButton();
-        jToggleButton3 = new javax.swing.JToggleButton();
+        jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         south = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -73,18 +68,11 @@ public class InfosMedecin extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
-        nomUt.setText("jLabel2");
+        nomUt.setText("jLabel5");
 
-        fonctionUt.setText("jLabel2");
+        fonctionUt.setText("jLabel5");
 
-        jButton1.setText("Déconnexion");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Page d'Accueil");
+        jButton2.setText("Déconnexion");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -100,31 +88,24 @@ public class InfosMedecin extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(nomUt)
                     .addComponent(fonctionUt))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 551, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 557, Short.MAX_VALUE)
+                .addComponent(jButton2)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton2)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(nomUt)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(fonctionUt)))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel4, java.awt.BorderLayout.CENTER);
-
-        getContentPane().add(jPanel1, java.awt.BorderLayout.NORTH);
 
         jPanel2.setLayout(new java.awt.BorderLayout());
 
@@ -132,16 +113,16 @@ public class InfosMedecin extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Ajouter une information");
+        jLabel1.setText("Accueil");
 
         javax.swing.GroupLayout northLayout = new javax.swing.GroupLayout(north);
         north.setLayout(northLayout);
         northLayout.setHorizontalGroup(
             northLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(northLayout.createSequentialGroup()
-                .addContainerGap(315, Short.MAX_VALUE)
+                .addContainerGap(416, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(315, Short.MAX_VALUE))
+                .addContainerGap(416, Short.MAX_VALUE))
         );
         northLayout.setVerticalGroup(
             northLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,7 +146,7 @@ public class InfosMedecin extends javax.swing.JFrame {
         );
         east2Layout.setVerticalGroup(
             east2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 470, Short.MAX_VALUE)
+            .addGap(0, 508, Short.MAX_VALUE)
         );
 
         center.add(east2, java.awt.BorderLayout.EAST);
@@ -180,7 +161,7 @@ public class InfosMedecin extends javax.swing.JFrame {
         );
         west2Layout.setVerticalGroup(
             west2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 470, Short.MAX_VALUE)
+            .addGap(0, 508, Short.MAX_VALUE)
         );
 
         center.add(west2, java.awt.BorderLayout.WEST);
@@ -218,50 +199,42 @@ public class InfosMedecin extends javax.swing.JFrame {
         centrer2.setBackground(new java.awt.Color(255, 255, 255));
         centrer2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0), 2));
 
-        jToggleButton1.setText("Ajouter une observation");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/Inf-icon.png"))); // NOI18N
+
+        jButton1.setText("Consulter un DM");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
-        jToggleButton2.setText("Ajouter une prescription");
-        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton2ActionPerformed(evt);
-            }
-        });
-
-        jToggleButton3.setText("Ajouter une lettre de sortie");
-        jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton3ActionPerformed(evt);
-            }
-        });
+        jButton3.setText("Valider une prescription");
 
         javax.swing.GroupLayout centrer2Layout = new javax.swing.GroupLayout(centrer2);
         centrer2.setLayout(centrer2Layout);
         centrer2Layout.setHorizontalGroup(
             centrer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(centrer2Layout.createSequentialGroup()
-                .addContainerGap(105, Short.MAX_VALUE)
+                .addContainerGap(116, Short.MAX_VALUE)
                 .addGroup(centrer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jToggleButton3)
-                    .addGroup(centrer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-                        .addComponent(jToggleButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(105, Short.MAX_VALUE))
+                    .addComponent(jButton3)
+                    .addComponent(jButton1)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
+
+        centrer2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton1, jButton3});
+
         centrer2Layout.setVerticalGroup(
             centrer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(centrer2Layout.createSequentialGroup()
-                .addGap(124, 124, 124)
-                .addComponent(jToggleButton1)
-                .addGap(75, 75, 75)
-                .addComponent(jToggleButton2)
-                .addGap(75, 75, 75)
-                .addComponent(jToggleButton3)
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addGap(52, 52, 52)
+                .addComponent(jLabel2)
+                .addGap(80, 80, 80)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(140, 140, 140))
         );
 
         center.add(centrer2, java.awt.BorderLayout.CENTER);
@@ -283,41 +256,46 @@ public class InfosMedecin extends javax.swing.JFrame {
 
         jPanel2.add(south, java.awt.BorderLayout.SOUTH);
 
-        getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 917, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 917, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 917, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 728, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, 0)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 632, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        AjouterObservation obs = new AjouterObservation(utilisateur,patient);
-        obs.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
-
-    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
-        AjouterPrescription prescription = new AjouterPrescription();
-        prescription.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jToggleButton2ActionPerformed
-
-    private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
-        AjouterLettreSortie lds = new AjouterLettreSortie(utilisateur, patient);
-        lds.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jToggleButton3ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         PageConnexion connex =new PageConnexion();
         connex.setVisible(true);
         this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        RechercherPatientInfDM rechercher = new RechercherPatientInfDM(utilisateur);
+        rechercher.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        PageAccueilMed pageAccueil = new PageAccueilMed(utilisateur);
-        pageAccueil.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
-       
     /**
      * @param args the command line arguments
      */
@@ -335,21 +313,21 @@ public class InfosMedecin extends javax.swing.JFrame {
 //                }
 //            }
 //        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(InfosMedecin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.gePageAccueilInfcueilInf.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(InfosMedecin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.LoggePageAccueilInfr(AccueilInf.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(InfosMedecin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.LPageAccueilInfogger(AccueilInf.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(InfosMedecin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.loggiPageAccueilInfgetLogger(AccueilInf.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
-//        //</editor-fold>
-//        //</editor-fold>
+//         //</editor-fold>
+//       //</editor-fold>
 //
 //        /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new InfosMedecin().setVisible(true);
+//   PageAccueilInfublic void run() {
+//                new AccueilInf().setVisible(true);
 //            }
 //        });
 //    }
@@ -361,15 +339,14 @@ public class InfosMedecin extends javax.swing.JFrame {
     private javax.swing.JLabel fonctionUt;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
-    private javax.swing.JToggleButton jToggleButton3;
     private javax.swing.JLabel nomUt;
     private javax.swing.JPanel north;
     private javax.swing.JPanel north2;
