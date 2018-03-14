@@ -144,5 +144,11 @@ public class Prestation {
         return r;
     }
     
+    public String afficherPresDMA(){
+        String s=new String("");
+        s= "- " + nomPrestation + "\n";
+        return s;
+    }
+    
 }
 

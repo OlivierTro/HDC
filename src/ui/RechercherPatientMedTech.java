@@ -458,7 +458,7 @@ private Personnel utilisateur;
     }//GEN-LAST:event_rechercherActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        PageAccueilMedTech accueil = new PageAccueilMedTech(utilisateur);
+        PageAccueilSecA accueil = new PageAccueilSecA(utilisateur);
         accueil.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed

@@ -377,6 +377,15 @@ public class Patient {
     public void ajouterSejour(Sejour sejour){
         listeSejour.add(sejour);
     }
+    
+    public String affcherDMA(){
+        String s= new String("");
+        for (int i = 0; i < listeSejour.size(); i++) {
+            Sejour a = listeSejour.get(i);
+            s += "\t \t" + "> Sejour n°" +i + a.afficherSejourDMA()+ "\n";
+        }
+        return s;
+    }
 
 
 }
