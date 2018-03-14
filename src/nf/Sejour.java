@@ -6,7 +6,6 @@
 package nf;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  *
@@ -17,7 +16,7 @@ public class Sejour {
     private Date dateArrivee;
     private Date dateSortie;
     private String numeroDeLit;
-    private PraticienHospitalier PH;
+    private String nomPH;
     private LettreDeSortie lettreSortie;
     private ArrayList<Prestation> listePrestation=new ArrayList<Prestation>();
     private ArrayList<Observation> listeObs=new ArrayList<Observation>();
@@ -25,11 +24,11 @@ public class Sejour {
     private ArrayList<String> listePrescription = new ArrayList<String>();
     
     //dma
-    public Sejour(String numeroSejour, Date dateArrivee, Date dateSortie, PraticienHospitalier nomPH, LettreDeSortie lettreSortie, ArrayList<String> listePrescription){
+    public Sejour(String numeroSejour, Date dateArrivee, Date dateSortie, String nomPH, LettreDeSortie lettreSortie, ArrayList<String> listePrescription){
         this.numSejour=numSejour;
         this.dateArrivee=dateArrivee;
         this.dateSortie=dateSortie;
-        this.PH=nomPH;
+        this.nomPH=nomPH;
         this.lettreSortie=lettreSortie;
         int i=0;
         while(i<this.listePrestation.size()){
@@ -99,9 +98,27 @@ public class Sejour {
     public LettreDeSortie getLettreSortie() {
         return lettreSortie;
     }
+
     
     public void setLettreSortie(LettreDeSortie lettreSortie) {
         this.lettreSortie = lettreSortie;
     }
+    
+    public String afficherSejourDMA(){
+        String s=new String("");
+        s= "Numéro de séjour : " + numSejour+ "\n"
+        + "\t" + "Date d'arrivée : " + dateArrivee + "\n"
+        + "\t" + "Date de sortie : " + dateSortie + "\n"
+        + "\t" + "Nom du PH responsable : " + nomPH + "\n"
+        +"\t" + "Lettre de sortie : " + lettreSortie + "\n"
+        +"\t" + "Liste des Prescriptions : "  + "\n";
+        for (int i = 0; i < listePrestation.size(); i++) {
+            Prestation a = listePrestation.get(i);
+            s += "\t \t" + "> " + a.afficherPresDMA()+ "\n";
+        }
+        
+        return s;
+    }
+   
 
 }
