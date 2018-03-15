@@ -5,11 +5,9 @@
  */
 package nf;
 
-import java.sql.Timestamp;
-import java.sql.Date;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
 
 /**
  *
@@ -17,8 +15,8 @@ import java.sql.SQLException;
  */
 public class Prestation {
     private String nomPrestation;
-    private Timestamp dateD;
-    private Timestamp dateR;
+    private java.util.Date dateD;
+    private java.util.Date dateR;
     private String auteurD;
     private String auteurR;
     private String resultat;
@@ -29,7 +27,15 @@ public class Prestation {
         this.prestation=prestation;
     }
     
-    public Prestation(String nomPrestation, Timestamp dateD, Timestamp dateR, String auteurD, String auteurR, String resultat, String prestation, Service service){
+    public Prestation(String nomPrestation, java.util.Date dateD, String auteurD, String prestation, Service service){
+        this.nomPrestation=nomPrestation;
+        this.dateD=dateD;
+        this.auteurD=auteurD;
+        this.prestation=prestation;
+        this.service=service;
+    }
+    
+    public Prestation(String nomPrestation, java.util.Date dateD, java.util.Date dateR, String auteurD, String auteurR, String resultat, String prestation, Service service){
         this.nomPrestation=nomPrestation;
         this.dateD=dateD;
         this.dateR=dateR;
@@ -43,8 +49,8 @@ public class Prestation {
     public void ajouterResultat(Sejour sejour, String resultat, String auteurR) {
         this.resultat = resultat;
         this.auteurR = auteurR;
-        java.util.Date now = new java.util.Date();
-        this.dateR = new java.sql.Timestamp(now.getTime());
+        Calendar now = new Calendar.getInstance();
+        this.dateR = now.getTime();
         boolean j=false;
          try {
             String requete = "UPDATE prestation SET resultat = ? , dateresultat = ? , auteurresultat = ? ";
@@ -52,10 +58,10 @@ public class Prestation {
             requete += " AND datedemande= ? ";
             PreparedStatement state = ConnexionBD.getInstance().prepareStatement(requete);
             state.setString(1,resultat);
-            state.setTimestamp(2,this.dateR);
+            state.toString(2,this.dateR);
             state.setString(3,auteurR);
             state.setString(4,sejour.getNumSejour());
-            state.setTimestamp(5,this.dateD);
+            state.setDate(this.dateD);
             int i = state.executeUpdate();
             if (i == 1) {
                 j = true;
@@ -77,14 +83,14 @@ public class Prestation {
     /**
      * @return the dateD
      */
-    public Timestamp getDateD() {
+    public java.util.Date getDateD() {
         return dateD;
     }
 
     /**
      * @return the dateR
      */
-    public Timestamp getDateR() {
+    public java.util.Date getDateR() {
         return dateR;
     }
 

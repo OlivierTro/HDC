@@ -5,7 +5,6 @@
  */
 package nf;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**
@@ -16,19 +15,16 @@ public class Sejour {
     private String numSejour;
     private Date dateArrivee;
     private Date dateSortie;
-    private Timestamp dateEdition;
     private String numeroDeLit;
-    private Service service;
     private String nomPH;
-    private String idAuteur;
-    private String lettreSortie;
+    private LettreDeSortie lettreSortie;
     private ArrayList<Prestation> listePrestation=new ArrayList<Prestation>();
     private ArrayList<Observation> listeObs=new ArrayList<Observation>();
     private ArrayList<SoinsInfirmiers> listeSoinsInf=new ArrayList<SoinsInfirmiers>();
     private ArrayList<String> listePrescription = new ArrayList<String>();
     
     //dma
-    public Sejour(String numeroSejour, Date dateArrivee, Date dateSortie, String nomPH, String lettreSortie, ArrayList<String> listePrescription){
+    public Sejour(String numeroSejour, Date dateArrivee, Date dateSortie, String nomPH, LettreDeSortie lettreSortie, ArrayList<String> listePrescription){
         this.numSejour=numSejour;
         this.dateArrivee=dateArrivee;
         this.dateSortie=dateSortie;
@@ -50,28 +46,13 @@ public class Sejour {
         this.listeSoinsInf=listeSoinsInf;
     }
     
-    public Sejour(String numSejour, Date dateA, String phresponsable, String auteur, String lit, Service service, Timestamp dateE){
-        this.numSejour = numSejour;
-        this.dateArrivee = dateA;
-        this.nomPH = phresponsable;
-        this.idAuteur = auteur;
-        this.numeroDeLit = lit;
-        this.service = service;
-        this.dateEdition = dateE;
+     //dm anesthésie et medico-technique
+    public Sejour(String numSejour, Date dateArrivee, String nomPH){
+        this.numSejour=numSejour;
+        this.dateArrivee=dateArrivee;
+        this.nomPH=nomPH;
     }
-            
-    public Sejour(String numsejour, Date dateA, String phresponsable, String auteur, String lit, Service service, Timestamp dateE, String lettreDeSortie, Date dateSortie){
-        this.numSejour = numSejour;
-        this.dateArrivee = dateA;
-        this.nomPH = phresponsable;
-        this.idAuteur = auteur;
-        this.numeroDeLit = lit;
-        this.service = service;
-        this.dateEdition = dateE;
-        this.lettreSortie = lettreDeSortie;
-        this.dateSortie = dateSortie;
-    }
-                            
+    
     //dm anesthésie et medico-technique
     public Sejour(ArrayList<Observation> listeObs, ArrayList<Prestation> listePrestation){
         this.listeObs=listeObs;
@@ -85,91 +66,57 @@ public class Sejour {
     public String getNumSejour() {
         return this.numSejour;
     }
-
-    /**
-     * @return the dateArrivee
-     */
-    public Date getDateArrivee() {
-        return dateArrivee;
-    }
-
-    /**
-     * @return the dateSortie
-     */
-    public Date getDateSortie() {
-        return dateSortie;
-    }
-
-    /**
-     * @return the dateEdition
-     */
-    public Timestamp getDateEdition() {
-        return dateEdition;
-    }
-
-    /**
-     * @return the numeroDeLit
-     */
-    public String getNumeroDeLit() {
-        return numeroDeLit;
-    }
-
-    /**
-     * @return the service
-     */
-    public Service getService() {
-        return service;
-    }
-
-    /**
-     * @return the nomPH
-     */
-    public String getNomPH() {
-        return nomPH;
-    }
-
-    /**
-     * @return the idAuteur
-     */
-    public String getIdAuteur() {
-        return idAuteur;
-    }
-
-    /**
-     * @return the lettreSortie
-     */
-    public String getLettreSortie() {
-        return lettreSortie;
-    }
-
-    /**
-     * @return the listePrestation
-     */
-    public ArrayList<Prestation> getListePrestation() {
-        return listePrestation;
-    }
-
-    /**
-     * @return the listeObs
-     */
-    public ArrayList<Observation> getListeObs() {
-        return listeObs;
-    }
-
-    /**
-     * @return the listeSoinsInf
-     */
-    public ArrayList<SoinsInfirmiers> getListeSoinsInf() {
+    
+    public ArrayList<SoinsInfirmiers> getListeSoinsInf(){
         return listeSoinsInf;
     }
-
-    /**
-     * @return the listePrescription
-     */
-    public ArrayList<String> getListePrescription() {
+    
+    // permet d'afficher tous les soins infirmiers
+    public String afficherListeSoinsInf() {
+        String s=new String("");
+        for (int i = 0; i < listeSoinsInf.size(); i++) {
+            SoinsInfirmiers a = listeSoinsInf.get(i);
+            s += "\t \t" + "> " + a.afficherSoinsInf()+ "\n";
+        }
+        return s;
+    }
+     // permet d'afficher toutes les observations
+    public String afficherListeObs() {
+        String s=new String("");
+        for (int i = 0; i < listeObs.size(); i++) {
+            Observation a = listeObs.get(i);
+            s += "\t \t" + "> " + a.afficherObservation()+ "\n";
+        }
+        return s;
+    }
+    
+    public ArrayList<Prestation> getListePrestation(){
+        return listePrestation;
+    }
+    
+    public ArrayList<String> getListePrescription(){
         return listePrescription;
     }
     
-   
+    public void ajouterObs(Observation observation){
+        listeObs.add(observation);
+    }
     
+    public void ajouterPrestation(Prestation p){
+        listePrestation.add(p);
+    }
+    
+    public void ajouterPrescription(String p){
+        listePrescription.add(p);
+    }
+
+    public LettreDeSortie getLettreSortie() {
+        return lettreSortie;
+    }
+
+    
+    public void setLettreSortie(LettreDeSortie lettreSortie) {
+        this.lettreSortie = lettreSortie;
+    }
+
 }

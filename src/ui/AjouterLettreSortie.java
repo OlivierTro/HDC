@@ -5,6 +5,10 @@
  */
 package ui;
 
+import javax.swing.JOptionPane;
+import nf.LettreDeSortie;
+import nf.Patient;
+import nf.Personnel;
 import nf.Service;
 
 /**
@@ -13,14 +17,20 @@ import nf.Service;
  */
 public class AjouterLettreSortie extends javax.swing.JFrame {
 
+    private Personnel utilisateur;
+    private Patient patient;
     /**
      * Creates new form AjouterObservation
      */
-    public AjouterLettreSortie(){
+    public AjouterLettreSortie(Personnel utilisateur, Patient patient){
         initComponents();
         this.setTitle("Ajouter une lettre de sortie");
         this.setSize(1400,740);
         this.setResizable(false);
+        this.utilisateur=utilisateur;
+        this.patient=patient;
+        nomUt.setText(utilisateur.getNom());
+        fonctionUt.setText(utilisateur.getFonction().toString());
         }
 
     /**
@@ -84,7 +94,7 @@ public class AjouterLettreSortie extends javax.swing.JFrame {
 
         fonctionUt.setText("jLabel10");
 
-        jButton1.setText("Deconnexion");
+        jButton1.setText("Déconnexion");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -113,6 +123,9 @@ public class AjouterLettreSortie extends javax.swing.JFrame {
                     .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
+
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton1, jButton2});
+
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -294,10 +307,20 @@ public class AjouterLettreSortie extends javax.swing.JFrame {
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
+        jTextArea1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextArea1FocusGained(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTextArea1);
 
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
+        jTextArea2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextArea2FocusGained(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTextArea2);
 
         jLabel9.setText("Traitement appliqué :");
@@ -393,11 +416,24 @@ public class AjouterLettreSortie extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
-      
+      jTextField1.setText("Nom");
+      jTextField2.setText("Prénom");
+      jTextArea1.setText("");
+      jTextArea2.setText("");
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        // TODO add your handling code here:
+        String auteur;
+        auteur= jTextField1.getText() + " " + jTextField2.getText();
+        String format = "dd/MM/yy";
+        java.text.SimpleDateFormat formater = new java.text.SimpleDateFormat(format);
+        java.util.Date d = new java.util.Date();
+        LettreDeSortie lds = new LettreDeSortie(auteur, d, jTextArea1.getText(), jTextArea2.getText());
+        int validation = JOptionPane.showConfirmDialog(null, "Voulez-vous ajouter cette lettre de sortie ?", "Enregistrement des données", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (validation == JOptionPane.YES_OPTION) {
+                    patient.getListeSejour().get(patient.getListeSejour().size()).setLettreSortie(lds);
+                    javax.swing.JOptionPane.showMessageDialog(null, "Lettre de sortie ajoutée");
+                }
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -411,7 +447,7 @@ public class AjouterLettreSortie extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        InfosMedecin info = new InfosMedecin();
+        InfosMedecin info = new InfosMedecin(utilisateur, patient);
         info.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -431,31 +467,39 @@ public class AjouterLettreSortie extends javax.swing.JFrame {
         jTextArea2.setText("");
     }//GEN-LAST:event_jToggleButton2FocusGained
 
+    private void jTextArea1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextArea1FocusGained
+        jTextArea1.setText("");
+    }//GEN-LAST:event_jTextArea1FocusGained
+
+    private void jTextArea2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextArea2FocusGained
+        jTextArea2.setText("");
+    }//GEN-LAST:event_jTextArea2FocusGained
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AjouterLettreSortie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AjouterLettreSortie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AjouterLettreSortie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AjouterLettreSortie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(AjouterLettreSortie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(AjouterLettreSortie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(AjouterLettreSortie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(AjouterLettreSortie.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -466,12 +510,12 @@ public class AjouterLettreSortie extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AjouterLettreSortie().setVisible(true);
-            }
-        });
-    }
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new AjouterLettreSortie().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel center;

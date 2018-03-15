@@ -10,11 +10,11 @@ package nf;
  * @author ANNELAURE
  */
 public class Observation {
-    private Date date;
+    private java.util.Date date;
     private String obs;
     private String auteur;
     
-    public Observation(Date date, String obs, String auteur){
+    public Observation(java.util.Date date, String obs, String auteur){
         this.date=date;
         this.auteur=auteur;
         this.obs=obs;
@@ -23,7 +23,7 @@ public class Observation {
     /**
      * @return the date
      */
-    public Date getDate() {
+    public java.util.Date getDate() {
         return date;
     }
 
@@ -39,6 +39,14 @@ public class Observation {
      */
     public String getAuteur() {
         return auteur;
+    }
+    
+    // affiche l'observation
+    public String afficherObservation() {
+        String s = "Date " + date.toString() + "\n"
+                + "\t" + "Auteur : " + auteur + "\n"
+                + "\t" + "Observation : " + obs + "\n";
+        return s;
     }
     
     

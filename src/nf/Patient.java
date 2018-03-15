@@ -41,11 +41,12 @@ public class Patient {
         this.sexe = sexe;
         this.medecinG = medecinG;
     }
-
-    public Patient(String ipp, String nomUsuel, String nomNaissance, String prenom, String nationalite, Sexe sexe){
-        
+    
+    public Patient(String nomUsuel, String prenom, Date dateNaissance){
+        this.nomUsuel=nomUsuel;
+        this.prenom=prenom;
+        this.dateNaissance=dateNaissance;
     }
-
 
     public Patient(String ipp, String nomUsuel, String nomNaissance, String prenom, Adresse adresse, Date dateNaissance, Sexe sexe, MedG medecinG,
             boolean hospitalise, Service localisationService, Timestamp dateEdition) {
@@ -76,7 +77,6 @@ public class Patient {
      * securite sociale d'un patient
      * @return Retourne un paramètre de type String
      */
-    @Override
     public String toString() {
         return getPrenom() + " " + getNomUsuel() + " - " + getDateNaissance().toStringN() + " / " + getSexe()+ " / " + getIpp();
         }
@@ -111,19 +111,19 @@ public class Patient {
             return false;
         }    
     
-    public boolean addSejour(String numSejour, Date dateArrive, String lit, String phresponsable, Service service, Personnel auteur) {
+    public boolean addSejour(int numSejour, Date dateArrive, String lit, String phresponssable, Service service, Personnel auteur) {
         boolean j = false;
         //Sejour sejour= new Sejour();
-        if (this.isHospitalise() == false) {
+        if (this.hospitalise == false) {
             try {
                 String requete = "INSERT INTO sejour(ipp,numsejour,datearrive,lit,phresponssable,service,auteur,dateEdition,lettredesortie) "
                         + "VALUES( ? , ? , ? , ? , ? , ? , ? , ? , ? ) ";
                 PreparedStatement state = ConnexionBD.getInstance().prepareStatement(requete);
                 state.setString(1, this.ipp);
-                state.setString(2, numSejour);
+                state.setInt(2, numSejour);
                 state.setDate(3, dateArrive);
                 state.setString(4, lit);
-                state.setString(5, phresponsable);
+                state.setString(5, phresponssable);
                 state.setString(6, service.toString());
                 state.setString(7, auteur.getId());
                 java.util.Date now = new java.util.Date();
@@ -133,8 +133,8 @@ public class Patient {
                 int i = state.executeUpdate();
                 if (i == 1) {
                     j = true;
-                    Sejour sejour = new Sejour(numSejour, dateArrive, phresponsable, auteur.getId(), lit, service, nownow);
-                    this.getListeSejour().add(sejour);
+                    Sejour sejour = new Sejour(numSejour, dateArrive, phresponssable, auteur.getId(), lit, service, nownow);
+                    this.listeSejour.add(sejour);
                     setLocalisationService(service);
                     setHospitalise();
                 }
@@ -202,7 +202,7 @@ public class Patient {
     }
 
     public void updateSejour() {
-        this.getListeSejour().clear();
+        this.listeSejour.clear();
         try {
             String requete = "SELECT * FROM sejour";
             requete += " WHERE ipp= ? ";
@@ -212,12 +212,12 @@ public class Patient {
             ResultSet res = state.getResultSet();
             while (res.next()) {
                 if (res.getString("lettredesortie").equals("")) {
-                    Sejour sejour = new Sejour(res.getString("numsejour"), res.getDate("datearrive"), res.getString("phresponsable"),
+                    Sejour sejour = new Sejour(res.getInt("numsejour"), res.getDate("datearrive"), res.getString("phresponssable"),
                             res.getString("auteur"), res.getString("lit"), Service.valueOf(res.getString("service")), res.getTimestamp("dateEdition"));
                     getListeSejour().add(sejour);
                 } else {
-                    Sejour sejour = new Sejour(res.getString("numsejour"), res.getDate("datearrive"), res.getString("phresponsable"),
-                            res.getString("auteur"), res.getString("lit"), Service.valueOf(res.getString("service")), res.getTimestamp("dateEdition"), res.getString("lettredesortie"), res.getDate("datesortie"));
+                    Sejour sejour = new Sejour(res.getInt("numsejour"), res.getDate("datearrive"), res.getString("phresponssable"),
+                            res.getString("auteur"), res.getString("lit"), Service.valueOf(res.getString("service")), res.getTimestamp("dateEdition"), res.getString("lettredesortie"), res.getTimestamp("datesortie"));
                     getListeSejour().add(sejour);
                 }
 
@@ -331,7 +331,7 @@ public class Patient {
 
             } else {
                 p = new Patient(res.getString("ipp"), res.getString("nomusuel"), res.getString("nomdenaissance"), res.getString("prenom"), res.getString("nationalite"), Sexe.valueOf(res.getString("sexe")), res.getDate("datedenaissance"),
-                        new Adresse(res.getString("ville"), res.getInt("codepostal"), res.getString("nomrue"), res.getInt("numadresse")), res.getString("medecingeneraliste"), Service.valueOf(res.getString("localisationservice")), res.getInt("hospitalise"), res.getTimestamp("dateedition"));
+                        new Adresse(res.getString("ville"), res.getInt("codepostal"), res.getString("nomrue"),res.getInt("numadresse")), res.getString("medecingeneraliste"), Service.valueOf(res.getString("localisationservice")), res.getInt("hospitalise"), res.getTimestamp("dateedition"));
             }
             res.close();
             state.close();
@@ -345,7 +345,7 @@ public class Patient {
      * @return the hospitalise
      */
     public boolean getHospitalise() {
-        return isHospitalise();
+        return hospitalise;
     }
 
     /**
@@ -368,40 +368,13 @@ public class Patient {
     public void setDateEdition(Timestamp dateEdition) {
         this.dateEdition = dateEdition;
     }
-
-    /**
-     * @param adresse the adresse to set
-     */
-    public void setAdresse(Adresse adresse) {
-        this.adresse = adresse;
-    }
-
-    /**
-     * @param medecinG the medecinG to set
-     */
-    public void setMedecinG(MedG medecinG) {
-        this.medecinG = medecinG;
-    }
-
-    /**
-     * @return the hospitalise
-     */
-    public boolean isHospitalise() {
-        return hospitalise;
-    }
-
-    /**
-     * @return the localisationService
-     */
-    public Service getLocalisationService() {
-        return localisationService;
-    }
-
-    /**
-     * @return the listeSejour
-     */
-    public ArrayList<Sejour> getListeSejour() {
+    
+    public ArrayList<Sejour> getListeSejour(){
         return listeSejour;
     }
-
+    
+    //ajoute un sejour
+    public void ajouterSejour(Sejour sejour){
+        listeSejour.add(sejour);
+    }
 }

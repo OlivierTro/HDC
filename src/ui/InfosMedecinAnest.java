@@ -6,17 +6,21 @@
 package ui;
 
 import nf.Observation;
+import nf.Patient;
+import nf.Personnel;
 
 /**
  *
  * @author ANNELAURE
  */
 public class InfosMedecinAnest extends javax.swing.JFrame {
+    private Personnel utilisateur;
+    private Patient patient;
 
     /**
      * Creates new form RechercherPatient
      */
-    public InfosMedecinAnest() {
+    public InfosMedecinAnest(Personnel utilisateur,Patient patient) {
         initComponents();
         this.setTitle("Ajouter une information");
         this.setSize(1400,740);
@@ -287,7 +291,7 @@ public class InfosMedecinAnest extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        AjouterObservation obs = new AjouterObservation();
+        AjouterObservation obs = new AjouterObservation(utilisateur, patient);
         obs.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jToggleButton1ActionPerformed
@@ -299,7 +303,7 @@ public class InfosMedecinAnest extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
-        AjouterLettreSortie lds = new AjouterLettreSortie();
+        AjouterLettreSortie lds = new AjouterLettreSortie(utilisateur, patient);
         lds.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jToggleButton3ActionPerformed
@@ -347,7 +351,7 @@ public class InfosMedecinAnest extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InfosMedecinAnest().setVisible(true);
+                new InfosMedecinAnest(utilisateur, patient).setVisible(true);
             }
         });
     }
