@@ -20,7 +20,7 @@ public class InfosMedecinAnest extends javax.swing.JFrame {
     /**
      * Creates new form RechercherPatient
      */
-    public InfosMedecinAnest() {
+    public InfosMedecinAnest(Personnel utilisateur,Patient patient) {
         initComponents();
         this.setTitle("Ajouter une information");
         this.setSize(1400,740);
@@ -351,7 +351,7 @@ public class InfosMedecinAnest extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InfosMedecinAnest().setVisible(true);
+                new InfosMedecinAnest(utilisateur, patient).setVisible(true);
             }
         });
     }

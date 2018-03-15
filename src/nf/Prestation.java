@@ -14,28 +14,11 @@ import java.util.Calendar;
  * @author ANNELAURE
  */
 public class Prestation {
-
-    /**
-     * @return the patient
-     */
-    public Patient getPatient() {
-        return patient;
-    }
-
-    /**
-     * @return the sejour
-     */
-    public Sejour getSejour() {
-        return sejour;
-    }
-    
-    private Patient patient;
-    private Sejour sejour;
     private String nomPrestation;
-    private Date dateD;
-    private Date dateR;
-    private PraticienHospitalier auteurD;
-    private PraticienHospitalier auteurR;
+    private java.util.Date dateD;
+    private java.util.Date dateR;
+    private String auteurD;
+    private String auteurR;
     private String resultat;
     private String prestation;
     private Service service;
@@ -44,9 +27,7 @@ public class Prestation {
         this.prestation=prestation;
     }
     
-    public Prestation(Patient patient, Sejour sejour, String nomPrestation, Date dateD, PraticienHospitalier auteurD, String prestation, Service service){
-        this.patient = patient;
-        this.sejour = sejour;
+    public Prestation(String nomPrestation, java.util.Date dateD, String auteurD, String prestation, Service service){
         this.nomPrestation=nomPrestation;
         this.dateD=dateD;
         this.auteurD=auteurD;
@@ -54,9 +35,7 @@ public class Prestation {
         this.service=service;
     }
     
-    public Prestation(Patient patient, Sejour sejour, String nomPrestation, Date dateD, Date dateR, PraticienHospitalier auteurD, PraticienHospitalier auteurR, String resultat, String prestation, Service service){
-        this.patient = patient;
-        this.sejour = sejour;
+    public Prestation(String nomPrestation, java.util.Date dateD, java.util.Date dateR, String auteurD, String auteurR, String resultat, String prestation, Service service){
         this.nomPrestation=nomPrestation;
         this.dateD=dateD;
         this.dateR=dateR;
@@ -67,15 +46,10 @@ public class Prestation {
         this.service=service;
     }
 
-    /*
-    public void ajouterResultat(Sejour sejour, String resultat, PraticienHospitalier auteurR) {
+    public void ajouterResultat(Sejour sejour, String resultat, String auteurR) {
         this.resultat = resultat;
         this.auteurR = auteurR;
-<<<<<<< HEAD
-        Calendar now = new Calendar();
-=======
-        Date now;
->>>>>>> test
+        Calendar now = new Calendar.getInstance();
         this.dateR = now.getTime();
         boolean j=false;
          try {
@@ -84,13 +58,8 @@ public class Prestation {
             requete += " AND datedemande= ? ";
             PreparedStatement state = ConnexionBD.getInstance().prepareStatement(requete);
             state.setString(1,resultat);
-<<<<<<< HEAD
             state.toString(2,this.dateR);
             state.setString(3,auteurR);
-=======
-            state.setDate(2,this.dateR);
-            state.setString(3,auteurR.getNomUsuel());
->>>>>>> test
             state.setString(4,sejour.getNumSejour());
             state.setDate(this.dateD);
             int i = state.executeUpdate();
@@ -102,7 +71,7 @@ public class Prestation {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }*/
+    }
     
     /**
      * @return the nomPrestation
@@ -114,28 +83,28 @@ public class Prestation {
     /**
      * @return the dateD
      */
-    public Date getDateD() {
+    public java.util.Date getDateD() {
         return dateD;
     }
 
     /**
      * @return the dateR
      */
-    public Date getDateR() {
+    public java.util.Date getDateR() {
         return dateR;
     }
 
     /**
      * @return the auteurD
      */
-    public PraticienHospitalier getAuteurD() {
+    public String getAuteurD() {
         return auteurD;
     }
 
     /**
      * @return the auteurR
      */
-    public PraticienHospitalier getAuteurR() {
+    public String getAuteurR() {
         return auteurR;
     }
 

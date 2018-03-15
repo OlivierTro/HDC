@@ -41,7 +41,7 @@ public class AfficherDMASecA extends javax.swing.JFrame {
         prenomMed.setText(patient.getMedecinG().getPrenom());
         adresseMailMed.setText(patient.getMedecinG().getAdresseMail());
         jLabel20.setText(String.valueOf(patient.getHospitalise()));
-        jTextArea1.setText(patient.affcherDMA());
+        jTextArea1.setText(patient.afficherDMA());
         
     }
 

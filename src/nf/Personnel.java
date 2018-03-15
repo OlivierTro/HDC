@@ -11,15 +11,18 @@ import java.util.ArrayList;
  *
  * @author ANNELAURE
  */
-public class Personnel extends Personne {
+public class Personnel {
+    private String nom;
+    private String prenom;
     private String id;
     private String motDePasse;
-    private Service service;
+    private String service;
     private Fonction fonction;
     private ArrayList<Patient> listePatients=new ArrayList<Patient>();
     
-    public Personnel(String nom, String prenom, String id, String motDePasse, Service service, Fonction fonction, ArrayList<Patient> listePatient){
-        super(nom,prenom);
+    public Personnel(String nom, String prenom, String id, String motDePasse, String service, Fonction fonction, ArrayList<Patient> listePatient){
+        this.nom=nom;
+        this.prenom=prenom;
         this.id=id;
         this.motDePasse=motDePasse;
         this.service=service;
@@ -27,12 +30,27 @@ public class Personnel extends Personne {
         this.listePatients=listePatient;        
     }
     
-    public Personnel(String nom, String prenom, String id, String motDePasse, Service service, Fonction fonction){
-        super(nom,prenom);
+    public Personnel(String nom, String prenom, String id, String motDePasse, String service, Fonction fonction){
+        this.nom=nom;
+        this.prenom=prenom;
         this.id=id;
         this.motDePasse=motDePasse;
         this.service=service;
         this.fonction=fonction;
+    }
+
+    /**
+     * @return the nom
+     */
+    public String getNom() {
+        return nom;
+    }
+
+    /**
+     * @return the prenom
+     */
+    public String getPrenom() {
+        return prenom;
     }
 
     /**
@@ -52,7 +70,7 @@ public class Personnel extends Personne {
     /**
      * @return the service
      */
-    public Service getService() {
+    public String getService() {
         return service;
     }
 
@@ -82,5 +100,19 @@ public class Personnel extends Personne {
      */
     public void setStatut(Fonction fonction) {
         this.fonction = fonction;
+    }
+
+    /**
+     * @param nom the nom to set
+     */
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    /**
+     * @param prenom the prenom to set
+     */
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
     }
 }

@@ -5,11 +5,14 @@
  */
 package ui;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import nf.Observation;
 import nf.Patient;
 import nf.Personnel;
-import nf.Service;
+import nf.PraticienHospitalier;
+import nf.Prescription;
 
 
 
@@ -20,20 +23,45 @@ import nf.Service;
 public class ValiderPrescriptionInf extends javax.swing.JFrame {
     private Personnel utilisateur;
     private Patient patient;
+    private ArrayList<Prescription> listePrescriptions;
+    private String[] liste;
 
     /**
      * Creates new form AjouterObservation
      */
-    public ValiderPrescriptionInf(Personnel utilisateur, Patient patient){
+    public ValiderPrescriptionInf(Personnel utilisateur, Patient patient, ArrayList<Prescription> listePresc){
         initComponents();
         this.setTitle("Valider une prescription");
         this.setSize(1400,740);
         this.setResizable(false);
         this.utilisateur=utilisateur;
         this.patient=patient;
+        this.listePrescriptions=listePresc;
         nomUt.setText(utilisateur.getNom());
         fonctionUt.setText(utilisateur.getFonction().toString());
+        this.setExtendedState(this.MAXIMIZED_BOTH);
+
+        int nbrligne = listePrescriptions.size();
+
+        Object[][] data = new Object[nbrligne][4];
+
+        this.liste = new String[4];
+
+        this.liste[0] = "Prescripteur";
+        this.liste[1] = "Prescription";
+        this.liste[2] = "Date de début";
+        this.liste[3] = "Valider";
+        int k = 0;
+        for (int i = 0; i < listePrescriptions.size(); i++) {
+            data[k][0] = listePrescriptions.get(i).getPrescripteur();
+            data[k][1] = listePrescriptions.get(i).getObjet();
+            data[k][2] = listePrescriptions.get(i).getDateDebut();
+            k++;
+            
+        }
+        jTable1.setModel(new DefaultTableModel(data, liste));
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -69,8 +97,8 @@ public class ValiderPrescriptionInf extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,9 +113,9 @@ public class ValiderPrescriptionInf extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        nomUt.setText("jLabel9");
+        nomUt.setText("nomUt");
 
-        fonctionUt.setText("jLabel9");
+        fonctionUt.setText("fonctionUt");
 
         jButton1.setText("Déconnexion");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -112,7 +140,7 @@ public class ValiderPrescriptionInf extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(nomUt)
                     .addComponent(fonctionUt))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 557, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 541, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -251,7 +279,7 @@ public class ValiderPrescriptionInf extends javax.swing.JFrame {
         centrer2.setBackground(new java.awt.Color(255, 255, 255));
         centrer2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0), 2));
 
-        jLabel3.setText("Sélectionnez la prescription à valider");
+        jLabel3.setText("Sélectionnez la prescription à valider :");
 
         jToggleButton1.setText("Valider la prescription");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -274,35 +302,50 @@ public class ValiderPrescriptionInf extends javax.swing.JFrame {
         jTextArea1.setPreferredSize(new java.awt.Dimension(164, 87));
         jScrollPane1.setViewportView(jTextArea1);
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Prescripteur", "Prescription", "Date de début", "Valider"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
-        jScrollPane2.setViewportView(jList1);
+        jScrollPane3.setViewportView(jTable1);
 
         javax.swing.GroupLayout centrer2Layout = new javax.swing.GroupLayout(centrer2);
         centrer2.setLayout(centrer2Layout);
         centrer2Layout.setHorizontalGroup(
             centrer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(centrer2Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jToggleButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jToggleButton1)
-                .addGap(25, 25, 25))
-            .addGroup(centrer2Layout.createSequentialGroup()
-                .addGroup(centrer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap(66, Short.MAX_VALUE)
+                .addGroup(centrer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(centrer2Layout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addGroup(centrer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)))
-                    .addGroup(centrer2Layout.createSequentialGroup()
-                        .addGap(233, 233, 233)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jToggleButton2)
+                        .addGap(380, 380, 380)
+                        .addComponent(jToggleButton1))
+                    .addGroup(centrer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel4)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addComponent(jScrollPane1)))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
         centrer2Layout.setVerticalGroup(
             centrer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -310,12 +353,12 @@ public class ValiderPrescriptionInf extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addGap(27, 27, 27)
                 .addGroup(centrer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jToggleButton2)
                     .addComponent(jToggleButton1))
@@ -365,8 +408,8 @@ public class ValiderPrescriptionInf extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        InfosMedecin info = new InfosMedecin(utilisateur, patient);
-        info.setVisible(true);
+        RechercherPatientInfPresc rechercher = new RechercherPatientInfPresc(utilisateur);
+        rechercher.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -375,7 +418,36 @@ public class ValiderPrescriptionInf extends javax.swing.JFrame {
         connex.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+private void afficherToutActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        int nombreLigne = listePrescriptions.size();
+        Object[][] data4 = new Object[nombreLigne][4];
 
+        this.liste = new String[4];
+
+        this.liste[0] = "Prescripteur";
+        this.liste[1] = "Prescription";
+        this.liste[2] = "Date de début";
+        this.liste[3] = "Valider";
+        int k=0;
+        boolean valider = false;
+        for (int i = 0; i < listePrescriptions.size(); i++) {
+            boolean present = false;
+            for ( int j=0; j<i; j++ ){
+                if ( listePrescriptions.get(i).equals(listePrescriptions.get(j))){
+                    present=true;
+                }
+            }
+            if ( present == false){
+            data4[k][0] = listePrescriptions.get(i).getPrescripteur();
+            data4[k][1] = listePrescriptions.get(i).getObjet();
+            data4[k][2] = listePrescriptions.get(i).getDateDebut();
+            data4[k][3] = valider;
+            k++;
+            }
+        }
+        jTable1.setModel(new DefaultTableModel(data4, liste));
+        jTable1.getColumnModel().getColumn(4).setCellRenderer(new MyCellRenderer());
+    }                                            
     /**
      * @param args the command line arguments
      */
@@ -423,12 +495,12 @@ public class ValiderPrescriptionInf extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton2;
