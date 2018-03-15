@@ -12,6 +12,20 @@ import java.util.ArrayList;
  * @author ANNELAURE
  */
 public class Sejour {
+
+    /**
+     * @return the dateArrivee
+     */
+    public Date getDateArrivee() {
+        return dateArrivee;
+    }
+
+    /**
+     * @return the dateSortie
+     */
+    public Date getDateSortie() {
+        return dateSortie;
+    }
     private String numSejour;
     private Date dateArrivee;
     private Date dateSortie;
@@ -107,8 +121,8 @@ public class Sejour {
     public String afficherSejourDMA(){
         String s=new String("");
         s= "Numéro de séjour : " + numSejour+ "\n"
-        + "\t" + "Date d'arrivée : " + dateArrivee + "\n"
-        + "\t" + "Date de sortie : " + dateSortie + "\n"
+        + "\t" + "Date d'arrivée : " + getDateArrivee() + "\n"
+        + "\t" + "Date de sortie : " + getDateSortie() + "\n"
         + "\t" + "Nom du PH responsable : " + nomPH + "\n"
         +"\t" + "Lettre de sortie : " + lettreSortie + "\n"
         +"\t" + "Liste des Prescriptions : "  + "\n";

@@ -11,18 +11,15 @@ import java.util.ArrayList;
  *
  * @author ANNELAURE
  */
-public class Personnel {
-    private String nom;
-    private String prenom;
+public class Personnel extends Personne {
     private String id;
     private String motDePasse;
-    private String service;
+    private Service service;
     private Fonction fonction;
     private ArrayList<Patient> listePatients=new ArrayList<Patient>();
     
-    public Personnel(String nom, String prenom, String id, String motDePasse, String service, Fonction fonction, ArrayList<Patient> listePatient){
-        this.nom=nom;
-        this.prenom=prenom;
+    public Personnel(String nom, String prenom, String id, String motDePasse, Service service, Fonction fonction, ArrayList<Patient> listePatient){
+        super(nom,prenom);
         this.id=id;
         this.motDePasse=motDePasse;
         this.service=service;
@@ -30,27 +27,12 @@ public class Personnel {
         this.listePatients=listePatient;        
     }
     
-    public Personnel(String nom, String prenom, String id, String motDePasse, String service, Fonction fonction){
-        this.nom=nom;
-        this.prenom=prenom;
+    public Personnel(String nom, String prenom, String id, String motDePasse, Service service, Fonction fonction){
+        super(nom,prenom);
         this.id=id;
         this.motDePasse=motDePasse;
         this.service=service;
         this.fonction=fonction;
-    }
-
-    /**
-     * @return the nom
-     */
-    public String getNom() {
-        return nom;
-    }
-
-    /**
-     * @return the prenom
-     */
-    public String getPrenom() {
-        return prenom;
     }
 
     /**
@@ -70,7 +52,7 @@ public class Personnel {
     /**
      * @return the service
      */
-    public String getService() {
+    public Service getService() {
         return service;
     }
 
@@ -92,7 +74,7 @@ public class Personnel {
      * @param mdp the mdp to set
      */
     public void setMdp(String mdp) {
-        this.mdp = mdp;
+        this.motDePasse = mdp;
     }
 
     /**
@@ -100,19 +82,5 @@ public class Personnel {
      */
     public void setStatut(Fonction fonction) {
         this.fonction = fonction;
-    }
-
-    /**
-     * @param nom the nom to set
-     */
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    /**
-     * @param prenom the prenom to set
-     */
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
     }
 }
