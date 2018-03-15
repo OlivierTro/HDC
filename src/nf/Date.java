@@ -115,6 +115,16 @@ public class Date implements Comparable {
             throw new IllegalArgumentException("La date est invalide");
         }
     }
+    
+    /**
+     * Crée une instance de date par défaut
+     * */
+    
+    public Date(){
+        this.annee = 0000;
+        this.mois = 00;
+        this.jour = 00;
+    }
 
     /**
      * Permet d'obtenir l'annee, le mois, le jour, l'heure et les minutes

@@ -14,7 +14,7 @@ import java.util.ArrayList;
  *
  * @author ANNELAURE
  */
-public class Patient {
+public class Patient extends Personne {
 
     private String ipp;
     private String nomUsuel;
@@ -25,35 +25,34 @@ public class Patient {
     private Adresse adresse;
     private DPI dpi;
     private String nationalite;
+    private PraticienHospitalier PHResponsable;
     private MedG medecinG;
     private boolean hospitalise;
     private Service localisationService;
     private Timestamp dateEdition;
     private ArrayList<Sejour> listeSejour;
 
-    public Patient(String ipp, String nomUsuel, String nomNaissance, String prenom, Adresse adresse, Date dateNaissance, Sexe sexe, MedG medecinG) {
+    public Patient(String ipp, String nomUsuel, String nomNaissance, String prenom, Adresse adresse, Date dateNaissance, Sexe sexe, MedG medecinG, PraticienHospitalier ph) {
+        super(nomUsuel, prenom);
         this.ipp = ipp;
-        this.nomUsuel = nomUsuel;
         this.nomNaissance = nomNaissance;
-        this.prenom = prenom;
         this.adresse = adresse;
         this.dateNaissance = dateNaissance;
         this.sexe = sexe;
         this.medecinG = medecinG;
+        this.PHResponsable = ph;
     }
     
     public Patient(String nomUsuel, String prenom, Date dateNaissance){
-        this.nomUsuel=nomUsuel;
-        this.prenom=prenom;
+        super(nomUsuel, prenom);
         this.dateNaissance=dateNaissance;
     }
 
     public Patient(String ipp, String nomUsuel, String nomNaissance, String prenom, Adresse adresse, Date dateNaissance, Sexe sexe, MedG medecinG,
             boolean hospitalise, Service localisationService, Timestamp dateEdition) {
+        super(nomUsuel, prenom);
         this.ipp = ipp;
-        this.nomUsuel = nomUsuel;
         this.nomNaissance = nomNaissance;
-        this.prenom = prenom;
         this.adresse = adresse;
         this.dateNaissance = dateNaissance;
         this.sexe = sexe;
@@ -111,9 +110,10 @@ public class Patient {
             return false;
         }    
     
-    public boolean addSejour(int numSejour, Date dateArrive, String lit, String phresponssable, Service service, Personnel auteur) {
+    
+    /*public boolean addSejour(int numSejour, Date dateArrive, String lit, String phresponssable, Service service, Personnel auteur) {
         boolean j = false;
-        //Sejour sejour= new Sejour();
+        Sejour sejour= new Sejour();
         if (this.hospitalise == false) {
             try {
                 String requete = "INSERT INTO sejour(ipp,numsejour,datearrive,lit,phresponssable,service,auteur,dateEdition,lettredesortie) "
@@ -133,7 +133,7 @@ public class Patient {
                 int i = state.executeUpdate();
                 if (i == 1) {
                     j = true;
-                    Sejour sejour = new Sejour(numSejour, dateArrive, phresponssable, auteur.getId(), lit, service, nownow);
+                    Sejour sejour = new Sejour(numSejour, dateArrive, dateSortie, phresponssable, auteur.getId(), lit, service, nownow);
                     this.listeSejour.add(sejour);
                     setLocalisationService(service);
                     setHospitalise();
@@ -248,7 +248,7 @@ public class Patient {
             e.printStackTrace();
         }
         return j;
-    }
+    } */
 
     // GETTERS & SETTERS
     /**
@@ -314,7 +314,7 @@ public class Patient {
     public MedG getMedecinG() {
         return medecinG;
     }
-
+/*
     public static Patient getPatient(int IPP) {
         Patient p = null;
         try {
@@ -339,7 +339,7 @@ public class Patient {
             e.printStackTrace();
         }
         return p;
-    }
+    }*/
 
     /**
      * @return the hospitalise
@@ -377,4 +377,9 @@ public class Patient {
     public void ajouterSejour(Sejour sejour){
         listeSejour.add(sejour);
     }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> test
 }

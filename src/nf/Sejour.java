@@ -12,6 +12,20 @@ import java.util.ArrayList;
  * @author ANNELAURE
  */
 public class Sejour {
+
+    /**
+     * @return the dateArrivee
+     */
+    public Date getDateArrivee() {
+        return dateArrivee;
+    }
+
+    /**
+     * @return the dateSortie
+     */
+    public Date getDateSortie() {
+        return dateSortie;
+    }
     private String numSejour;
     private Date dateArrivee;
     private Date dateSortie;
@@ -110,5 +124,25 @@ public class Sejour {
     public void setLettreSortie(LettreDeSortie lettreSortie) {
         this.lettreSortie = lettreSortie;
     }
+<<<<<<< HEAD
+=======
+    
+    public String afficherSejourDMA(){
+        String s=new String("");
+        s= "Numéro de séjour : " + numSejour+ "\n"
+        + "\t" + "Date d'arrivée : " + getDateArrivee() + "\n"
+        + "\t" + "Date de sortie : " + getDateSortie() + "\n"
+        + "\t" + "Nom du PH responsable : " + nomPH + "\n"
+        +"\t" + "Lettre de sortie : " + lettreSortie + "\n"
+        +"\t" + "Liste des Prescriptions : "  + "\n";
+        for (int i = 0; i < listePrestation.size(); i++) {
+            Prestation a = listePrestation.get(i);
+            s += "\t \t" + "> " + a.afficherPresDMA()+ "\n";
+        }
+        
+        return s;
+    }
+   
+>>>>>>> test
 
 }

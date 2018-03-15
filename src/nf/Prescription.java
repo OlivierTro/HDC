@@ -47,6 +47,6 @@ public class Prescription {
     }
 
     public Sejour getSejour() {
-        return visite;
+        return sejour;
     }
 }

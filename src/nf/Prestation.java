@@ -15,10 +15,10 @@ import java.util.Calendar;
  */
 public class Prestation {
     private String nomPrestation;
-    private java.util.Date dateD;
-    private java.util.Date dateR;
-    private String auteurD;
-    private String auteurR;
+    private Date dateD;
+    private Date dateR;
+    private PraticienHospitalier auteurD;
+    private PraticienHospitalier auteurR;
     private String resultat;
     private String prestation;
     private Service service;
@@ -27,7 +27,7 @@ public class Prestation {
         this.prestation=prestation;
     }
     
-    public Prestation(String nomPrestation, java.util.Date dateD, String auteurD, String prestation, Service service){
+    public Prestation(String nomPrestation, Date dateD, PraticienHospitalier auteurD, String prestation, Service service){
         this.nomPrestation=nomPrestation;
         this.dateD=dateD;
         this.auteurD=auteurD;
@@ -35,7 +35,7 @@ public class Prestation {
         this.service=service;
     }
     
-    public Prestation(String nomPrestation, java.util.Date dateD, java.util.Date dateR, String auteurD, String auteurR, String resultat, String prestation, Service service){
+    public Prestation(String nomPrestation, Date dateD, Date dateR, PraticienHospitalier auteurD, PraticienHospitalier auteurR, String resultat, String prestation, Service service){
         this.nomPrestation=nomPrestation;
         this.dateD=dateD;
         this.dateR=dateR;
@@ -46,10 +46,15 @@ public class Prestation {
         this.service=service;
     }
 
-    public void ajouterResultat(Sejour sejour, String resultat, String auteurR) {
+    /*
+    public void ajouterResultat(Sejour sejour, String resultat, PraticienHospitalier auteurR) {
         this.resultat = resultat;
         this.auteurR = auteurR;
+<<<<<<< HEAD
         Calendar now = new Calendar();
+=======
+        Date now;
+>>>>>>> test
         this.dateR = now.getTime();
         boolean j=false;
          try {
@@ -58,8 +63,13 @@ public class Prestation {
             requete += " AND datedemande= ? ";
             PreparedStatement state = ConnexionBD.getInstance().prepareStatement(requete);
             state.setString(1,resultat);
+<<<<<<< HEAD
             state.toString(2,this.dateR);
             state.setString(3,auteurR);
+=======
+            state.setDate(2,this.dateR);
+            state.setString(3,auteurR.getNomUsuel());
+>>>>>>> test
             state.setString(4,sejour.getNumSejour());
             state.setDate(this.dateD);
             int i = state.executeUpdate();
@@ -71,7 +81,7 @@ public class Prestation {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
+    }*/
     
     /**
      * @return the nomPrestation
@@ -97,14 +107,14 @@ public class Prestation {
     /**
      * @return the auteurD
      */
-    public String getAuteurD() {
+    public PraticienHospitalier getAuteurD() {
         return auteurD;
     }
 
     /**
      * @return the auteurR
      */
-    public String getAuteurR() {
+    public PraticienHospitalier getAuteurR() {
         return auteurR;
     }
 

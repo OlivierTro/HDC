@@ -9,22 +9,32 @@ package nf;
  *
  * @author ANNELAURE
  */
-public enum Service {
-    MedicoTechnique("Medico-Technique"),
-    Clinique("Clinique"),
-    Anesthesie("Anesthésie"),
-    Radiologie("Radiologie");
-    
-    private String service;
-    
-    private Service(String service){
-        this.service=service;
+public abstract class Service {
+
+    private PraticienHospitalier chefDeService;
+
+    private String nomService;
+    private String typeService;
+
+    public Service(String nomService, String typeService) {
+        this.nomService = nomService;
+        this.typeService = typeService;
     }
 
-    /**
-     * @return the service
-     */
-    public String getService() {
-        return service;
+    public String getNom() {
+        return nomService;
     }
+    
+    public String getType(){
+        return typeService;
+    }
+
+    public boolean equals(Service s) {
+        boolean b = false;
+        if (this.nomService.equals(s.getNom())) {
+            b = true;
+        }
+        return b;
+    }
+
 }
