@@ -149,7 +149,7 @@ public class Prestation {
         return s;
     }
     
-    public String afficherPresDMC(){
+    public String afficherPresDM(){
         String s;
         s="Nom de la prestation : " + nomPrestation + "\n"
         + "\t" + "Date de la demande : " + dateD + "\n";

@@ -397,5 +397,23 @@ public class Patient {
         }
         return s;
     }
+    
+    public String afficherDMMedA(){
+        String s= new String("");
+        for (int i = 0; i < listeSejour.size(); i++) {
+            Sejour a = listeSejour.get(i);
+            s += "\t \t" + "> Sejour n°" +i + a.afficherSejourDMMedA()+ "\n";
+        }
+        return s;
+    }
+    
+    public String afficherDMTech(){
+        String s= new String("");
+        for (int i = 0; i < listeSejour.size(); i++) {
+            Sejour a = listeSejour.get(i);
+            s += "\t \t" + "> Sejour n°" +i + a.afficherSejourDMTech()+ "\n";
+        }
+        return s;
+    }
 
 }

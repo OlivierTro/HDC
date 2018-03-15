@@ -142,7 +142,7 @@ public class Sejour {
         s=s+ "\t" + "Prestation : " +  "\n";
         for (int i = 0; i < listePrestation.size(); i++) {
             Prestation a = listePrestation.get(i);
-            s += "\t \t" + "> " + a.afficherPresDMC()+ "\n";
+            s += "\t \t" + "> " + a.afficherPresDM()+ "\n";
         }
         if (lettreSortie==null){
             s=s+ "Lettre de sortie : il n'y a pas de lettre de sortie." + "\n";
@@ -152,6 +152,41 @@ public class Sejour {
         }
         
         
+        return s;
+    }
+    
+    public String afficherSejourDMMedA(){
+        String s=new String("");
+        s= "Observations : " + "\n";
+        for (int i = 0; i < listeObs.size(); i++) {
+            Observation a = listeObs.get(i);
+            s += "\t \t" + "> " + a.afficherObservation()+ "\n";
+        }
+        s=s+ "\t" + "Prescriptions : " + "\n";
+        for (int i = 0; i < listePrescription.size(); i++) {
+            Prescription a = listePrescription.get(i);
+            s += "\t \t" + "> " + a.afficherPrescription()+ "\n";
+        }
+        s=s+ "\t" + "Prestation : " +  "\n";
+        for (int i = 0; i < listePrestation.size(); i++) {
+            Prestation a = listePrestation.get(i);
+            s += "\t \t" + "> " + a.afficherPresDM()+ "\n";
+        }
+        return s;
+    }
+    
+    public String afficherSejourDMTech(){
+        String s=new String("");
+        s= "Observations : " + "\n";
+        for (int i = 0; i < listeObs.size(); i++) {
+            Observation a = listeObs.get(i);
+            s += "\t \t" + "> " + a.afficherObservation()+ "\n";
+        }
+        s=s+ "\t" + "Prestation : " +  "\n";
+        for (int i = 0; i < listePrestation.size(); i++) {
+            Prestation a = listePrestation.get(i);
+            s += "\t \t" + "> " + a.afficherPresDM()+ "\n";
+        }
         return s;
     }
 
