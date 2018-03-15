@@ -202,7 +202,7 @@ public class PageAccueilMed extends javax.swing.JFrame {
         centrer2.setBackground(new java.awt.Color(255, 255, 255));
         centrer2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0), 2));
 
-        jButton1.setText("Consulter un DMA");
+        jButton1.setText("Consulter un DM");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -230,6 +230,9 @@ public class PageAccueilMed extends javax.swing.JFrame {
                     .addComponent(jButton4))
                 .addContainerGap(109, Short.MAX_VALUE))
         );
+
+        centrer2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton1, jButton4});
+
         centrer2Layout.setVerticalGroup(
             centrer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(centrer2Layout.createSequentialGroup()

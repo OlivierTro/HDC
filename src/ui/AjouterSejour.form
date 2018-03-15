@@ -481,7 +481,11 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel5">
                   <Properties>
+<<<<<<< HEAD
+                    <Property name="text" type="java.lang.String" value="Patient"/>
+=======
                     <Property name="text" type="java.lang.String" value="Patient :"/>
+>>>>>>> master3
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel6">

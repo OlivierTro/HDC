@@ -46,6 +46,13 @@ public class Sejour {
         this.listeSoinsInf=listeSoinsInf;
     }
     
+     //dm anesthésie et medico-technique
+    public Sejour(String numSejour, Date dateArrivee, String nomPH){
+        this.numSejour=numSejour;
+        this.dateArrivee=dateArrivee;
+        this.nomPH=nomPH;
+    }
+    
     //dm anesthésie et medico-technique
     public Sejour(ArrayList<Observation> listeObs, ArrayList<Prestation> listePrestation){
         this.listeObs=listeObs;
@@ -103,22 +110,5 @@ public class Sejour {
     public void setLettreSortie(LettreDeSortie lettreSortie) {
         this.lettreSortie = lettreSortie;
     }
-    
-    public String afficherSejourDMA(){
-        String s=new String("");
-        s= "Numéro de séjour : " + numSejour+ "\n"
-        + "\t" + "Date d'arrivée : " + dateArrivee + "\n"
-        + "\t" + "Date de sortie : " + dateSortie + "\n"
-        + "\t" + "Nom du PH responsable : " + nomPH + "\n"
-        +"\t" + "Lettre de sortie : " + lettreSortie + "\n"
-        +"\t" + "Liste des Prescriptions : "  + "\n";
-        for (int i = 0; i < listePrestation.size(); i++) {
-            Prestation a = listePrestation.get(i);
-            s += "\t \t" + "> " + a.afficherPresDMA()+ "\n";
-        }
-        
-        return s;
-    }
-   
 
 }

@@ -52,6 +52,8 @@ public class PageAccueilInf extends javax.swing.JFrame {
         south2 = new javax.swing.JPanel();
         centrer2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         south = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -197,23 +199,42 @@ public class PageAccueilInf extends javax.swing.JFrame {
         centrer2.setBackground(new java.awt.Color(255, 255, 255));
         centrer2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0), 2));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/Medical-Nurse-Female-Light-icon.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/Inf-icon.png"))); // NOI18N
+
+        jButton1.setText("Consulter un DM");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Valider une prescription");
 
         javax.swing.GroupLayout centrer2Layout = new javax.swing.GroupLayout(centrer2);
         centrer2.setLayout(centrer2Layout);
         centrer2Layout.setHorizontalGroup(
             centrer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(centrer2Layout.createSequentialGroup()
-                .addContainerGap(121, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap(116, Short.MAX_VALUE)
+                .addGroup(centrer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton3)
+                    .addComponent(jButton1)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
+
+        centrer2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton1, jButton3});
+
         centrer2Layout.setVerticalGroup(
             centrer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(centrer2Layout.createSequentialGroup()
-                .addGap(54, 54, 54)
+                .addGap(52, 52, 52)
                 .addComponent(jLabel2)
-                .addContainerGap(322, Short.MAX_VALUE))
+                .addGap(80, 80, 80)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(140, 140, 140))
         );
 
         center.add(centrer2, java.awt.BorderLayout.CENTER);
@@ -269,6 +290,12 @@ public class PageAccueilInf extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        RechercherPatientInfDM rechercher = new RechercherPatientInfDM(utilisateur);
+        rechercher.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -310,7 +337,9 @@ public class PageAccueilInf extends javax.swing.JFrame {
     private javax.swing.JPanel centrer2;
     private javax.swing.JPanel east2;
     private javax.swing.JLabel fonctionUt;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel22;
