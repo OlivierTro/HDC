@@ -429,6 +429,7 @@ private void afficherToutActionPerformed(java.awt.event.ActionEvent evt) {
         this.liste[2] = "Date de début";
         this.liste[3] = "Valider";
         int k=0;
+        boolean valider = false;
         for (int i = 0; i < listePrescriptions.size(); i++) {
             boolean present = false;
             for ( int j=0; j<i; j++ ){
@@ -440,11 +441,12 @@ private void afficherToutActionPerformed(java.awt.event.ActionEvent evt) {
             data4[k][0] = listePrescriptions.get(i).getPrescripteur();
             data4[k][1] = listePrescriptions.get(i).getObjet();
             data4[k][2] = listePrescriptions.get(i).getDateDebut();
-    //        data4[k][3] =
+            data4[k][3] = valider;
             k++;
             }
         }
         jTable1.setModel(new DefaultTableModel(data4, liste));
+        jTable1.getColumnModel().getColumn(4).setCellRenderer(new MyCellRenderer());
     }                                            
     /**
      * @param args the command line arguments
