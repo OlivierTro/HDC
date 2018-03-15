@@ -14,6 +14,23 @@ import java.util.Calendar;
  * @author ANNELAURE
  */
 public class Prestation {
+
+    /**
+     * @return the patient
+     */
+    public Patient getPatient() {
+        return patient;
+    }
+
+    /**
+     * @return the sejour
+     */
+    public Sejour getSejour() {
+        return sejour;
+    }
+    
+    private Patient patient;
+    private Sejour sejour;
     private String nomPrestation;
     private Date dateD;
     private Date dateR;
@@ -27,7 +44,9 @@ public class Prestation {
         this.prestation=prestation;
     }
     
-    public Prestation(String nomPrestation, Date dateD, PraticienHospitalier auteurD, String prestation, Service service){
+    public Prestation(Patient patient, Sejour sejour, String nomPrestation, Date dateD, PraticienHospitalier auteurD, String prestation, Service service){
+        this.patient = patient;
+        this.sejour = sejour;
         this.nomPrestation=nomPrestation;
         this.dateD=dateD;
         this.auteurD=auteurD;
@@ -35,7 +54,9 @@ public class Prestation {
         this.service=service;
     }
     
-    public Prestation(String nomPrestation, Date dateD, Date dateR, PraticienHospitalier auteurD, PraticienHospitalier auteurR, String resultat, String prestation, Service service){
+    public Prestation(Patient patient, Sejour sejour, String nomPrestation, Date dateD, Date dateR, PraticienHospitalier auteurD, PraticienHospitalier auteurR, String resultat, String prestation, Service service){
+        this.patient = patient;
+        this.sejour = sejour;
         this.nomPrestation=nomPrestation;
         this.dateD=dateD;
         this.dateR=dateR;
@@ -93,14 +114,14 @@ public class Prestation {
     /**
      * @return the dateD
      */
-    public java.util.Date getDateD() {
+    public Date getDateD() {
         return dateD;
     }
 
     /**
      * @return the dateR
      */
-    public java.util.Date getDateR() {
+    public Date getDateR() {
         return dateR;
     }
 

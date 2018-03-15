@@ -10,30 +10,22 @@ package nf;
  * @author Pauline
  */
 public class LettreDeSortie {
-<<<<<<< HEAD
+
     private Personnel auteur;
     private Date delivrance;
     private String diagnostic;
     private String traitement;
-    
-    public LettreDeSortie(Personnel auteur, Date delivrance, String diagnostic, String traitement){
-=======
-    private String auteur;
-    private java.util.Date delivrance;
-    private String diagnostic;
-    private String traitement;
-    
-    public LettreDeSortie(String auteur, java.util.Date delivrance, String diagnostic, String traitement){
->>>>>>> master3
+
+    public LettreDeSortie(Personnel auteur, Date delivrance, String diagnostic, String traitement) {
         this.auteur = auteur;
         this.delivrance = delivrance;
         this.diagnostic = diagnostic;
         this.traitement = traitement;
     }
-    
-    public boolean isLettreDeSortie(){
+
+    public boolean isLettreDeSortie() {
         boolean sortie = false;
-        if(this.getDelivrance() != null){
+        if (this.getDelivrance() != null) {
             sortie = true;
         }
         return sortie;
@@ -42,44 +34,28 @@ public class LettreDeSortie {
     /**
      * @return the auteur
      */
-<<<<<<< HEAD
     public Personnel getAuteur() {
-=======
-    public String getAuteur() {
->>>>>>> master3
         return auteur;
     }
 
     /**
      * @param auteur the auteur to set
      */
-<<<<<<< HEAD
     public void setAuteur(Personnel auteur) {
-=======
-    public void setAuteur(String auteur) {
->>>>>>> master3
         this.auteur = auteur;
     }
 
     /**
      * @return the delivrance
      */
-<<<<<<< HEAD
     public Date getDelivrance() {
-=======
-    public java.util.Date getDelivrance() {
->>>>>>> master3
         return delivrance;
     }
 
     /**
      * @param delivrance the delivrance to set
      */
-<<<<<<< HEAD
     public void setDelivrance(Date delivrance) {
-=======
-    public void setDelivrance(java.util.Date delivrance) {
->>>>>>> master3
         this.delivrance = delivrance;
     }
 

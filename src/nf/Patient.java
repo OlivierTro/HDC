@@ -377,9 +377,4 @@ public class Patient extends Personne {
     public void ajouterSejour(Sejour sejour){
         listeSejour.add(sejour);
     }
-<<<<<<< HEAD
-=======
-
-
->>>>>>> test
 }

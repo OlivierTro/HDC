@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.Date;
 
 /**
  *
@@ -77,15 +78,16 @@ public class ConnexionBD {
         return service;
     }
     
-    public Fonction getFonction(String nomPersonnel) {
-        Fonction fonction = null;
-        if (nomPersonnel != null) {
-            nomPersonnel = formatBD(nomPersonnel);
+    //Renvoie la fonction du personnel passé en paramètre
+    public Personnel getFonction(String idPersonnel) {
+        Personnel fonction = null;
+        if (idPersonnel != null) {
+            idPersonnel = formatBD(idPersonnel);
             try {
-                fonction = (Fonction) (new ServiceC(NomSC.valueOf(nomPersonnel)));
+                fonction = (Personnel) (new Fonction(idPersonnel));
             } catch (IllegalArgumentException e1) {
                 try {
-                    fonction = (Fonction) (new ServiceMT(NomSMT.valueOf(nomPersonnel)));
+                    fonction = (Personnel) (new Personnel(id.valueOf(idPersonnel)));
                 } catch (IllegalArgumentException e2) {
                 }
             }
@@ -99,13 +101,13 @@ public class ConnexionBD {
         TypeSejour typeSejour = null;
         if (sejourEnCours != null) {
             for (Sejour s : sejourEnCours) {
-                if (s.getDateEntree().before(new java.util.Date()) && s.getService() instanceof ServiceC) {
+                if (s.getDateArrivee().before(new Date()) && s.getService() instanceof ServiceC) {
                     typeSejour = typeSejour.Hospitalisation;
                     try {
                         Statement st = connect.createStatement();
                         st.executeUpdate("update visites "
                                 + "set typevisite='" + typeSejour.toString()
-                                + "' where nosj='" + v.getNumeroDeSejour() + "';");
+                                + "' where nosj='" + s.getNumSejour() + "';");
                     } catch (SQLException e) {
                         System.out.println("Echec de la mise a jour des types de visite");
                     }
@@ -121,10 +123,10 @@ public class ConnexionBD {
         try {
             Statement st = connect.createStatement();
             st.executeUpdate("update prestations "
-                    + "set operateur='" + ph.getIdentifiant()
+                    + "set operateur='" + ph.getId()
                     + "' , resultat='" + resultat
                     + "' , daterealisation='" + new SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date())
-                    + "' where ipppatient='" + p.getPatient().getIPP() + "' and service='" + formatBD(ph.getService().getNom()) + "';");
+                    + "' where ipppatient='" + p.getPatient().getIpp() + "' and service='" + formatBD(ph.getService().getNom()) + "';");
             succes = true;
         } catch (SQLException e) {
             System.out.println("Echec de l'ajout du résultat dans la BD");
