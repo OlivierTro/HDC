@@ -6,19 +6,21 @@
 package ui;
 
 import nf.Date;
+import nf.Patient;
 import nf.Personnel;
 
 /**
  *
  * @author ANNELAURE
  */
-public class RechercherPatientMedTech extends javax.swing.JFrame {
-private Personnel utilisateur;
-
+public class RechercherPatientInfDM extends javax.swing.JFrame {
+    private Personnel utilisateur;
+    
+    
     /**
-     * Creates new form RechercherPatientMedTech
+     * Creates new form RechercherPatient
      */
-    public RechercherPatientMedTech(Personnel utilisateur) {
+    public RechercherPatientInfDM(Personnel personnel) {
         initComponents();
         this.setTitle("Rechercher un Patient");
         this.setSize(1400,740);
@@ -63,7 +65,7 @@ private Personnel utilisateur;
         annee = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        rechercher = new javax.swing.JToggleButton();
+        jToggleButton1 = new javax.swing.JToggleButton();
         jToggleButton2 = new javax.swing.JToggleButton();
         south = new javax.swing.JPanel();
 
@@ -115,16 +117,17 @@ private Personnel utilisateur;
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(nomUt)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(fonctionUt))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(nomUt)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fonctionUt)))
+                        .addComponent(jButton2)))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -228,7 +231,7 @@ private Personnel utilisateur;
 
         jLabel3.setText("Prénom patient");
 
-        jLabel4.setText("Date de Naissance Patient");
+        jLabel4.setText("Date de naissance patient");
 
         nom.setText("Nom");
         nom.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -284,10 +287,10 @@ private Personnel utilisateur;
 
         jLabel6.setText("/");
 
-        rechercher.setText("Rechercher");
-        rechercher.addActionListener(new java.awt.event.ActionListener() {
+        jToggleButton1.setText("Consulter DM");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rechercherActionPerformed(evt);
+                jToggleButton1ActionPerformed(evt);
             }
         });
 
@@ -303,12 +306,12 @@ private Personnel utilisateur;
         centrer2Layout.setHorizontalGroup(
             centrer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(centrer2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(118, Short.MAX_VALUE)
                 .addGroup(centrer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel2)
                     .addComponent(nom)
                     .addComponent(jLabel3)
-                    .addComponent(prenom)
+                    .addComponent(prenom, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
                     .addComponent(jLabel4)
                     .addGroup(centrer2Layout.createSequentialGroup()
                         .addComponent(jour, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -320,12 +323,12 @@ private Personnel utilisateur;
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(annee, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(116, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, centrer2Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jToggleButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(rechercher)
+                .addComponent(jToggleButton1)
                 .addGap(28, 28, 28))
         );
         centrer2Layout.setVerticalGroup(
@@ -348,9 +351,9 @@ private Personnel utilisateur;
                     .addComponent(mois, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
                     .addComponent(annee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
                 .addGroup(centrer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rechercher)
+                    .addComponent(jToggleButton1)
                     .addComponent(jToggleButton2))
                 .addGap(94, 94, 94))
         );
@@ -379,43 +382,13 @@ private Personnel utilisateur;
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void nomFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nomFocusGained
-        nom.setText("");
-    }//GEN-LAST:event_nomFocusGained
-
     private void prenomFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_prenomFocusGained
         prenom.setText("");
     }//GEN-LAST:event_prenomFocusGained
 
-    private void jourFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jourFocusGained
-        jour.setText("");
-    }//GEN-LAST:event_jourFocusGained
-
-    private void jourKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jourKeyTyped
-        if (jour.getText().length() == 1) {
-            mois.requestFocus();
-        }
-    }//GEN-LAST:event_jourKeyTyped
-
-    private void moisFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_moisFocusGained
-        mois.setText("");
-    }//GEN-LAST:event_moisFocusGained
-
-    private void moisKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_moisKeyTyped
-        if (mois.getText().length() == 1) {
-            annee.requestFocus();
-        }
-    }//GEN-LAST:event_moisKeyTyped
-
-    private void anneeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_anneeFocusGained
-        annee.setText("");
-    }//GEN-LAST:event_anneeFocusGained
-
-    private void anneeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_anneeKeyTyped
-        if (annee.getText().length() == 3) {
-            rechercher.requestFocus();
-        }
-    }//GEN-LAST:event_anneeKeyTyped
+    private void nomFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nomFocusGained
+        nom.setText("");
+    }//GEN-LAST:event_nomFocusGained
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
         nom.setText("Nom");
@@ -425,13 +398,49 @@ private Personnel utilisateur;
         annee.setText("AAAA");
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
+    private void jourFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jourFocusGained
+        jour.setText("");
+    }//GEN-LAST:event_jourFocusGained
+
+    private void moisFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_moisFocusGained
+        mois.setText("");
+    }//GEN-LAST:event_moisFocusGained
+
+    private void anneeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_anneeFocusGained
+        annee.setText("");
+    }//GEN-LAST:event_anneeFocusGained
+
+    private void jourKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jourKeyTyped
+        if (jour.getText().length() == 1) {
+            mois.requestFocus();
+        }
+    }//GEN-LAST:event_jourKeyTyped
+
+    private void moisKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_moisKeyTyped
+        if (mois.getText().length() == 1) {
+            annee.requestFocus();
+        }
+    }//GEN-LAST:event_moisKeyTyped
+
+    private void anneeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_anneeKeyTyped
+        if (annee.getText().length() == 3) {
+            jToggleButton1.requestFocus();
+        }
+    }//GEN-LAST:event_anneeKeyTyped
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         PageConnexion connex =new PageConnexion();
         connex.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void rechercherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rechercherActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        PageAccueilInf accueil = new PageAccueilInf(utilisateur);
+        accueil.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         Date dateN= new Date(Integer.parseInt(jour.getText()),Integer.parseInt(mois.getText()),Integer.parseInt(annee.getText()));
         String nomP=new String(nom.getText());
         String prenomP = new String(prenom.getText());
@@ -447,21 +456,12 @@ private Personnel utilisateur;
             
         }
         if (i<utilisateur.getListePatient().size()){
-        AjouterResultatMedTech info = new AjouterResultatMedTech(utilisateur, utilisateur.getListePatient().get(i));
-        info.setVisible(true);
-        this.dispose();
+        
         }
         else{
             javax.swing.JOptionPane.showMessageDialog(null, "Ce patient n'existe pas");
         }
-        
-    }//GEN-LAST:event_rechercherActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        PageAccueilMedTech accueil = new PageAccueilMedTech(utilisateur);
-        accueil.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -480,20 +480,20 @@ private Personnel utilisateur;
 //                }
 //            }
 //        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(RechercherPatientMedTech.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(RechercherPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(RechercherPatientMedTech.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(RechercherPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(RechercherPatientMedTech.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(RechercherPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(RechercherPatientMedTech.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(RechercherPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
 //        //</editor-fold>
 //
 //        /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
-//                new RechercherPatientMedTech().setVisible(true);
+//                new RechercherPatient().setVisible(true);
 //            }
 //        });
 //    }
@@ -517,6 +517,7 @@ private Personnel utilisateur;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JTextField jour;
     private javax.swing.JTextField mois;
@@ -525,7 +526,6 @@ private Personnel utilisateur;
     private javax.swing.JPanel north;
     private javax.swing.JPanel north2;
     private javax.swing.JTextField prenom;
-    private javax.swing.JToggleButton rechercher;
     private javax.swing.JPanel south;
     private javax.swing.JPanel south2;
     private javax.swing.JPanel west2;
