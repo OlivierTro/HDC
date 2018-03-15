@@ -3,21 +3,39 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/nf/Observation.java</file>
             <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/nf/Personnel.java</file>
-            <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/nf/LettreDeSortie.java</file>
-            <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/nf/TypeService.java</file>
+            <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/nf/DPI.java</file>
+            <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/ui/AjouterObservation.java</file>
+            <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/ui/AfficherPrestationsInf.java</file>
             <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/nf/Sejour.java</file>
+            <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/nf/SoinsInfirmiers.java</file>
             <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/ui/PageAccueilMed.java</file>
             <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/nf/Service.java</file>
-            <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/ui/AjouterLettreSortie.java</file>
-            <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/nf/Patient.java</file>
-            <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/nf/MedG.java</file>
-            <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/ui/AjouterSejour.java</file>
+            <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/nf/Prestation.java</file>
+            <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/ui/RechercherPatientInfoMed.java</file>
             <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/ui/PageAccueilSec.java</file>
             <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/ui/AfficherInfoMedTech.java</file>
-            <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/ui/AjouterPrescription.java</file>
             <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/nf/Sexe.java</file>
+            <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/ui/AjouterPrescription.java</file>
             <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/ui/PageAccueilMedTech.java</file>
+            <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/ui/CreationDMA.java</file>
+            <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/ui/AfficherObservation.java</file>
+            <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/ui/InfosMedecinAnest.java</file>
+            <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/ui/InfosMedecin.java</file>
+            <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/nf/LettreDeSortie.java</file>
+            <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/nf/TypeService.java</file>
+            <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/ui/AfficherInformationDMAMed.java</file>
+            <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/ui/AjouterResultatMedTech.java</file>
+            <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/ui/RechercherPatientMedTech.java</file>
+            <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/ui/RechercherPatientDMAMed.java</file>
+            <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/nf/Date.java</file>
+            <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/nf/ConnexionBD.java</file>
+            <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/nf/Adresse.java</file>
+            <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/ui/AjouterLettreSortie.java</file>
+            <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/nf/Patient.java</file>
+            <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/ui/AjouterSejour.java</file>
+            <file>file:/C:/Users/Pauline/Documents/GitHub/HDC/src/ui/RechercherPatient.java</file>
         </group>
     </open-files>
 </project-private>
