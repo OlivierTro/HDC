@@ -82,8 +82,8 @@ public class SoinsInfirmiers {
     
     // affiche un soins infirmier
     public String afficherSoinsInf() {
-        String s = "Date du soins " + dateRealSoins.toString() + "\n"
-                + "\t" + "Nom du soins : " + nomSoins + "\n"
+        String s = "Date du soin " + dateRealSoins.toString() + "\n"
+                + "\t" + "Nom du soin : " + nomSoins + "\n"
                 + "\t" + "Description : " + description + "\n"
                 + "\t" + "Auteur :" + auteur + "\n"
                 + "\t" + "Date édition :" + dateEdition + "\n";

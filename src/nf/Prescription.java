@@ -49,4 +49,18 @@ public class Prescription {
     public Sejour getSejour() {
         return sejour;
     }
+    
+    public String afficherPrescription() {
+        String s=new String("");
+        s=s+"Prescripteur : " + prescripteur + "\n"
+        + "\t" + "Date de début :" + dateDebut + "\n";
+        if (dateFin==null){
+        s=s+ "\t" + "Date de fin : la prescription n'a pas été réalisée" + "\n"; 
+        }
+        else{
+            s=s+ "\t" + "Date de fin : "+ dateFin + "\n"; 
+        }
+        s=s+"\t" + "Prescription : "+ objet + "\n";
+        return s;
+    }
 }

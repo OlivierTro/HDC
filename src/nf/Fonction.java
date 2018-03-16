@@ -13,7 +13,7 @@ public enum Fonction {
     DECO("Deconnecte"),
     ph("ph"),
     chefPh("chefPh"),
-    infirmiere("inf"),
+    infirmier("inf"),
     interne("int"),
     secretaireM("secM"),
     secretaireAdm("secA");

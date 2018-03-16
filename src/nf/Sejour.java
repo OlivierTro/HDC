@@ -25,10 +25,10 @@ public class Sejour {
     private ArrayList<Prestation> listePrestation = new ArrayList<Prestation>();
     private ArrayList<Observation> listeObs = new ArrayList<Observation>();
     private ArrayList<SoinsInfirmiers> listeSoinsInf = new ArrayList<SoinsInfirmiers>();
-    private ArrayList<String> listePrescription = new ArrayList<String>();
+    private ArrayList<Prescription> listePrescription = new ArrayList<Prescription>();
 
     //dma
-    public Sejour(String numeroSejour, Date dateArrivee, Date dateSortie, PraticienHospitalier nomPH, LettreDeSortie lettreSortie, ArrayList<String> listePrescription) {
+    public Sejour(String numeroSejour, Date dateArrivee, Date dateSortie, PraticienHospitalier nomPH, LettreDeSortie lettreSortie, ArrayList<Prescription> listePrescription) {
         this.numSejour = numSejour;
         this.dateArrivee = dateArrivee;
         this.dateSortie = dateSortie;
@@ -36,7 +36,7 @@ public class Sejour {
         this.lettreSortie = lettreSortie;
         int i = 0;
         while (i < this.listePrestation.size()) {
-            listePrescription.add(listePrestation.get(i).getPrestation());
+            listePrescription.add(listePrescription.get(i));
             i++;
         }
 
@@ -144,20 +144,98 @@ public class Sejour {
         this.lettreSortie = lettreSortie;
     }
 
-    /*
-    public String afficherSejourDMA(){
-        String s=new String("");
-        s= "Numéro de séjour : " + numSejour+ "\n"
-        + "\t" + "Date d'arrivée : " + getDateArrivee() + "\n"
-        + "\t" + "Date de sortie : " + getDateSortie() + "\n"
-        + "\t" + "Nom du PH responsable : " + nomPH + "\n"
-        +"\t" + "Lettre de sortie : " + lettreSortie + "\n"
-        +"\t" + "Liste des Prescriptions : "  + "\n";
+    public ArrayList<Prescription> getListePrescription() {
+        return listePrescription;
+    }
+
+    // permet d'afficher toutes les prescriptions
+    public String afficherListePrescription() {
+        String s = new String("");
+        for (int i = 0; i < listePrescription.size(); i++) {
+            Prescription a = listePrescription.get(i);
+            s += "\t \t" + "> " + a.afficherPrescription() + "\n";
+        }
+        return s;
+    }
+
+    public String afficherSejourDMA() {
+        String s = new String("");
+        s = "NumÃ©ro de sÃ©jour : " + numSejour + "\n"
+                + "\t" + "Date d'arrivee : " + dateArrivee + "\n"
+                + "\t" + "Date de sortie : " + dateSortie + "\n"
+                + "\t" + "Nom du PH responsable : " + PH + "\n"
+                + "\t" + "Lettre de sortie : " + lettreSortie + "\n"
+                + "\t" + "Liste des Prescriptions : " + "\n";
         for (int i = 0; i < listePrestation.size(); i++) {
             Prestation a = listePrestation.get(i);
-            s += "\t \t" + "> " + a.afficherPresDMA()+ "\n";
+            s += "\t \t" + "> " + a.afficherPresDMA() + "\n";
         }
-        
+
         return s;
-    }*/
+    }
+
+    public String afficherSejourDMC() {
+        String s = new String("");
+        s = "Observations : " + "\n";
+        for (int i = 0; i < listeObs.size(); i++) {
+            Observation a = listeObs.get(i);
+            s += "\t \t" + "> " + a.afficherObservation() + "\n";
+        }
+        s = s + "\t" + "Prescriptions : " + "\n";
+        for (int i = 0; i < listePrescription.size(); i++) {
+            Prescription a = listePrescription.get(i);
+            s += "\t \t" + "> " + a.afficherPrescription() + "\n";
+        }
+        s = s + "\t" + "Prestation : " + "\n";
+        for (int i = 0; i < listePrestation.size(); i++) {
+            Prestation a = listePrestation.get(i);
+            s += "\t \t" + "> " + a.afficherPresDM() + "\n";
+        }
+        if (lettreSortie == null) {
+            s = s + "Lettre de sortie : il n'y a pas de lettre de sortie." + "\n";
+        } else {
+            s = s + "Lettre de sortie :" + lettreSortie + "\n";
+        }
+
+        return s;
+    }
+
+    public String afficherSejourDMMedA() {
+        String s = new String("");
+        s = "Observations : " + "\n";
+        for (int i = 0; i < listeObs.size(); i++) {
+            Observation a = listeObs.get(i);
+            s += "\t \t" + "> " + a.afficherObservation() + "\n";
+        }
+        s = s + "\t" + "Prescriptions : " + "\n";
+        for (int i = 0; i < listePrescription.size(); i++) {
+            Prescription a = listePrescription.get(i);
+            s += "\t \t" + "> " + a.afficherPrescription() + "\n";
+        }
+        s = s + "\t" + "Prestation : " + "\n";
+        for (int i = 0; i < listePrestation.size(); i++) {
+            Prestation a = listePrestation.get(i);
+            s += "\t \t" + "> " + a.afficherPresDM() + "\n";
+        }
+        return s;
+    }
+
+    public String afficherSejourDMTech() {
+        String s = new String("");
+        s = "Observations : " + "\n";
+        for (int i = 0; i < listeObs.size(); i++) {
+            Observation a = listeObs.get(i);
+            s += "\t \t" + "> " + a.afficherObservation() + "\n";
+        }
+        s = s + "\t" + "Prestation : " + "\n";
+        for (int i = 0; i < listePrestation.size(); i++) {
+            Prestation a = listePrestation.get(i);
+            s += "\t \t" + "> " + a.afficherPresDM() + "\n";
+        }
+        return s;
+    }
+
+    public void ajouterPrescription(Prescription p) {
+        listePrescription.add(p);
+    }
 }

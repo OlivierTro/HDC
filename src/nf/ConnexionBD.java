@@ -19,7 +19,7 @@ import java.util.Date;
 public class ConnexionBD {
 
     private static String urlPilote = "com.mysql.jdbc.Driver";
-    private static String url = "jdbc:mysql://mysql-hdc.alwaysdata.net:3306/hdc";
+    private static String url = "jdbc:mysql://mysql-healthdatacare_hdcbd.alwaysdata.net:3306/hdc";
     private static String user = "hdc_db";
     private static String passwd = "java";
     private static Connection connect;
@@ -97,7 +97,7 @@ public class ConnexionBD {
 
     //Change les consultations en hospitalisations lorsque la date d'entrée est inférieure à la date du jour
     public void miseAJourSejours() {
-        ArrayList<Sejour> sejourEnCours = getSejour("Select * from sejour where lettresortie is null;");
+        ArrayList<Sejour> sejourEnCours = getSejours("Select * from sejour where lettresortie is null;");
         TypeSejour typeSejour = null;
         if (sejourEnCours != null) {
             for (Sejour s : sejourEnCours) {
@@ -176,7 +176,7 @@ public class ConnexionBD {
             }
             requete += ";";
             try {
-                Statement st = cnx.createStatement();
+                Statement st = connect.createStatement();
                 ResultSet rst = st.executeQuery(requete);
                 while (rst.next()) {
                     idsPH.add(rst.getString("id"));
@@ -193,7 +193,7 @@ public class ConnexionBD {
         ArrayList<PraticienHospitalier> pHsService = new ArrayList<PraticienHospitalier>();
         if (nomService != null & !nomService.equals("")) {
             try {
-                Statement st = cnx.createStatement();
+                Statement st = connect.createStatement();
                 ResultSet rst = st.executeQuery("select * from utilisateurs where profession='Praticien hospitalier' and service='" + formatBD(nomService) + "';");
                 while (rst.next()) {
                     String nom = rst.getString("nom");
@@ -201,7 +201,8 @@ public class ConnexionBD {
                     String id = rst.getString("id");
                     String mdp = rst.getString("mdp");
                     Service service = getService(rst.getString("service"));
-                    PraticienHospitalier pH = new PraticienHospitalier(nom, prenom, id, mdp, service);
+                    Fonction fonction = getFOnction(rst.getFonction("ph"));
+                    PraticienHospitalier pH = new PraticienHospitalier(nom, prenom, id, mdp, service, fonction);
                     pHsService.add(pH);
                 }
             } catch (SQLException e) {
@@ -251,15 +252,15 @@ public class ConnexionBD {
     //Génère un numéro de séjour automatiquement en fonction de ceux déjà présent dans la base de données et en respectant le format imposé dans l'appel d'offre
     public String genererNumSejour() {
         String dateAA = new SimpleDateFormat("yyMM").format(new java.util.Date()).toUpperCase();
-        ArrayList<Visite> visites = getVisites("Select * from visites where nosj like '" + dateAA + "%';");
+        ArrayList<Sejour> sejours = getSejours("Select * from sejour where nosj like '" + dateAA + "%';");
         String numSejour = null;
-        numSejour = dateAA + String.format("%05d", visites.size());
+        numSejour = dateAA + String.format("%05d", sejours.size());
         return numSejour;
     }
 
     //Renvoie une instance de Visite correspondant à la visite en cours du patient donné en paramètre
     public Sejour getSejourCourant(Patient p) {
-        ArrayList<Sejour> sejours = getSejour("Select * from sejour where ipp='" + p.getIpp() + "' and lettreSortie is null and dateSortie is null order by dateEntree desc;");
+        ArrayList<Sejour> sejours = getSejours("Select * from sejour where ipp='" + p.getIpp() + "' and lettreSortie is null and dateSortie is null order by dateEntree desc;");
         Sejour s = null;
         if (sejours.size() > 0) {
             s = sejours.get(0);
@@ -282,9 +283,9 @@ public class ConnexionBD {
     //Renvoie la date d'entrée de la visite courante du patient donné en paramètre
     public java.util.Date getDateEntree(Patient p) {
         java.util.Date d = null;
-        Visite v = getVisiteCourante(p);
-        if (v != null) {
-            d = v.getDateEntree();
+        Sejour s = getSejourCourant(p);
+        if (s != null) {
+            d = s.getDateArrivee();
         }
         return d;
     }
@@ -293,30 +294,30 @@ public class ConnexionBD {
     //à sa visite et en ajoutant la lettre de sortie donnée en paramètre (renvoie un booléen qui est vrai si la manipulation a bien été effectuée)
     public boolean fermerDossier(Patient p, String lettreSortie) {
         boolean fermetureOK = false;
-        Visite v = getVisiteCourante(p);
-        TypeVisite typeVisite = null;
-        if (v.getDateEntree().before(new java.util.Date()) && v.getService() instanceof ServiceClinique) {
-            typeVisite = TypeVisite.Hospitalisation;
-        } else if (v.getDateEntree().equals(v.getDateSortie())) {
-            typeVisite = TypeVisite.Consultation;
+        Sejour s = getSejourCourant(p);
+        TypeSejour typeSejour = null;
+        if (s.getDateArrivee().before(new java.util.Date()) && s.getService() instanceof ServiceC) {
+            typeSejour = TypeSejour.Hospitalisation;
+        } else if (s.getDateArrivee().equals(s.getDateSortie())) {
+            typeSejour = TypeSejour.Consultation;
         } else {
-            typeVisite = v.getType();
+            typeSejour = s.getType();
         }
-        if (v != null) {
+        if (s != null) {
             try {
-                Statement st = cnx.createStatement();
+                Statement st = connect.createStatement();
                 st.executeUpdate("update visites "
                         + "set datesortie='" + new SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date())
                         + "' ,  lettreSortie='" + lettreSortie
-                        + "' , typevisite='" + typeVisite.toString()
-                        + "' where nosj='" + v.getNumeroDeSejour() + "';");
+                        + "' , typevisite='" + typeSejour.toString()
+                        + "' where nosj='" + s.getNumSejour() + "';");
                 fermetureOK = true;
             } catch (SQLException e) {
                 System.out.println("Echec de l'ajout Date et Lettre de sortie");
             }
             try {
-                Statement st = cnx.createStatement();
-                st.executeUpdate("update patients set service=null ,  phresponsable=null where ipp='" + p.getIPP() + "';");
+                Statement st = connect.createStatement();
+                st.executeUpdate("update patients set service=null ,  phresponsable=null where ipp='" + p.getIpp() + "';");
             } catch (SQLException e) {
                 fermetureOK = false;
                 System.out.println("Echec de la sortie du patient du service");
@@ -328,7 +329,7 @@ public class ConnexionBD {
     //Permet d'ajouter une nature de soin dans la base de données
     public void ajouterNatureSoin(String natureSoin) {
         try {
-            Statement st = cnx.createStatement();
+            Statement st = connect.createStatement();
             st.executeUpdate("insert into naturessoin (naturesoin) values ('" + natureSoin + "');");
         } catch (SQLException e) {
             System.out.println("Echec de l'ajout de la nature de soin.");
@@ -343,9 +344,9 @@ public class ConnexionBD {
             st.executeUpdate("insert into soins (ipppatient,visite,soignant,naturesoin,date)"
                     + " values ('" + pr.getPatient().getIpp() + "','"
                     + pr.getSejour().getNumSejour() + "','"
-                    + pr.getPrescripteur().getId() + "','"
-                    + pr.getObjet() + "','"
-                    + new SimpleDateFormat("yyyy-MM-dd hh:mm").format(pr.getDate()) + "');");
+                    + pr.getAuteurR().getId() + "','"
+                    + pr.getPrestation() + "','"
+                    + new SimpleDateFormat("yyyy-MM-dd hh:mm").format(pr.getDateR()) + "');");
             b = true;
         } catch (SQLException e) {
             System.out.println("Echec de l'ajout du soin.");
@@ -355,11 +356,11 @@ public class ConnexionBD {
     }
 
     //Renvoie l'instance de Professionnel correspondant à l'identifiant et au mot de passe donnés en paramètres
-    public Professionnel trouverUtilisateur(String id, String mdp) {
-        Professionnel p = null;
+    public Personnel trouverUtilisateur(String id, String mdp) {
+        Personnel p = null;
         try {
-            Statement st = cnx.createStatement();
-            ResultSet rst = st.executeQuery("select * from utilisateurs where ID='" + id + "' and MDP='" + mdp + "';");
+            Statement st = connect.createStatement();
+            ResultSet rst = st.executeQuery("select * from utilisateurs where ID='" + id + "' and MDP='" + mdp + "' and FONCTION="+ fonction +"';");
             rst.last();
             String profession = rst.getString("PROFESSION");
             Service service = null;
@@ -367,17 +368,14 @@ public class ConnexionBD {
                 service = getService(rst.getString("SERVICE"));
             }
             switch (profession) {
-                case "Interne":
-                    p = new Interne(rst.getString("Nom"), rst.getString("Prenom"), id, mdp, service);
-                    break;
                 case "Praticien hospitalier":
-                    p = new PraticienHospitalier(rst.getString("Nom"), rst.getString("Prenom"), id, mdp, service);
+                    p = new PraticienHospitalier(rst.getString("Nom"), rst.getString("Prenom"), id, mdp, service, fonction);
                     break;
-                case "Secrétaire médicale":
-                    p = new SecretaireMedicale(rst.getString("Nom"), rst.getString("Prenom"), id, mdp);
+                case "Secrétaire":
+                    p = new Secretaire(rst.getString("Nom"), rst.getString("Prenom"), id, mdp, service, fonction);
                     break;
                 case "Infirmier(e)":
-                    p = new Infirmier(rst.getString("Nom"), rst.getString("Prenom"), id, mdp, service);
+                    p = new Infirmier(rst.getString("Nom"), rst.getString("Prenom"), id, mdp, service, fonction);
                     break;
             }
         } catch (SQLException e) {
@@ -393,12 +391,12 @@ public class ConnexionBD {
         ArrayList<Patient> patientsNonAdmis = getPatientsService(null);
         if (p.estDansListe(patientsNonAdmis)) {
             try {
-                Statement st = cnx.createStatement();
+                Statement st = connect.createStatement();
                 String requete = "UPDATE patients SET service='" + formatBD(s.getNom());
                 if (!formatBD(s.getNom()).equals(NomSMT.Radiologie.toString())) {
-                    requete += "' ,  phresponsable='" + phResp.getIdentifiant();
+                    requete += "' ,  phresponsable='" + phResp.getId();
                 }
-                requete += "' where ipp='" + p.getIPP() + "';";
+                requete += "' where ipp='" + p.getIpp() + "';";
                 st.executeUpdate(requete);
                 admis = true;
             } catch (SQLException e) {
@@ -412,7 +410,7 @@ public class ConnexionBD {
     public ArrayList<Patient> getPatientsService(Service service) {
         ArrayList<Patient> patients = new ArrayList<Patient>();
         try {
-            Statement st = cnx.createStatement();
+            Statement st = connect.createStatement();
             ResultSet rst;
             if (service == null) {
                 rst = st.executeQuery("select * from patients where service is null;");
@@ -421,14 +419,16 @@ public class ConnexionBD {
             }
             while (rst.next()) {
                 String ipp = rst.getString("ipp");
-                String nom = rst.getString("nom");
+                String nomUsuel = rst.getString("nomUsuel");
+                String nomNaissance = rst.getString("nomNaissance");
                 String prenom = rst.getString("prenom");
                 java.util.Date d = rst.getDate("datenaissance");
-                PraticienHospitalier responsable = null;
-                String adresse = rst.getString("adresse");
+                MedG medecinG = null;
+                PraticienHospitalier ph = null;
+                Adresse adresse = Adresse.valueOf(rst.getString("adresse"));
                 Sexe sexe = Sexe.valueOf(rst.getString("sexe"));
 
-                Patient p = new Patient(ipp, nom, prenom, d, responsable, adresse, sexe, service);
+                Patient p = new Patient(ipp, nomUsuel, nomNaissance, prenom, adresse, d, sexe, medecinG, ph, sexe, service);
                 patients.add(p);
             }
         } catch (SQLException e) {
@@ -441,7 +441,7 @@ public class ConnexionBD {
     public ArrayList<Patient> getPatientsPrestationService(Service service) {
         ArrayList<Patient> patients = new ArrayList<Patient>();
         try {
-            Statement st = cnx.createStatement();
+            Statement st = connect.createStatement();
             String requete = "select * from patients where ipp in (select ipppatient from prestations where service='" + formatBD(service.getNom()) + "' and resultat is null);";
             ResultSet rst = st.executeQuery(requete);
             while (rst.next()) {
@@ -462,14 +462,14 @@ public class ConnexionBD {
     }
 
     //Renvoie la liste des services cliniques enregistrés dans la base de données
-    public ArrayList<ServiceClinique> getServicesCliniques() {
-        ArrayList<ServiceClinique> servicesC = new ArrayList<ServiceClinique>();
+    public ArrayList<ServiceC> getServicesCliniques() {
+        ArrayList<ServiceC> servicesC = new ArrayList<ServiceC>();
         try {
-            Statement st = cnx.createStatement();
+            Statement st = connect.createStatement();
             ResultSet rst = st.executeQuery("select * from services where TYPE='Clinique';");
             while (rst.next()) {
                 Service s = getService(rst.getString("NOM"));
-                servicesC.add((ServiceClinique) s);
+                servicesC.add((ServiceC) s);
             }
         } catch (SQLException e) {
             System.out.println("Aucun service clinique trouvé dans la BD");
@@ -479,14 +479,14 @@ public class ConnexionBD {
     }
 
     //Renvoie la liste des services médico-techniques enregistrés dans la base de données
-    public ArrayList<ServiceMedicoTechnique> getServicesMedicoTechniques() {
-        ArrayList<ServiceMedicoTechnique> servicesMT = new ArrayList<ServiceMedicoTechnique>();
+    public ArrayList<ServiceMT> getServicesMedicoTechniques() {
+        ArrayList<ServiceMT> servicesMT = new ArrayList<ServiceMT>();
         try {
-            Statement st = cnx.createStatement();
+            Statement st = connect.createStatement();
             ResultSet rst = st.executeQuery("select * from services where TYPE='Médico-technique';");
             while (rst.next()) {
                 Service s = getService(rst.getString("NOM"));
-                servicesMT.add((ServiceMedicoTechnique) s);
+                servicesMT.add((ServiceMT) s);
             }
         } catch (SQLException e) {
             System.out.println("Aucun service médico-technique trouvé dans la BD");
@@ -499,7 +499,7 @@ public class ConnexionBD {
     public ArrayList<Service> getAllServices() {
         ArrayList<Service> services = new ArrayList<Service>();
         try {
-            Statement st = cnx.createStatement();
+            Statement st = connect.createStatement();
             ResultSet rst = st.executeQuery("select * from services;");
             while (rst.next()) {
                 Service s = getService(rst.getString("NOM"));
@@ -522,7 +522,7 @@ public class ConnexionBD {
     public ArrayList<Patient> getPatients(String requete) {
         ArrayList<Patient> patients = new ArrayList<Patient>();
         try {
-            Statement st = cnx.createStatement();
+            Statement st = connect.createStatement();
             ResultSet rst = st.executeQuery(requete);
             int i = 0;
             while (rst.next()) {
@@ -555,7 +555,7 @@ public class ConnexionBD {
     }
 
     //Renvoie la liste des visites du patient donné en paramètre ordonnée de la date d'entrée la plus récente à la plus ancienne
-    public ArrayList<Sejour> getVisitesOrdre(Patient p) {
+    public ArrayList<Sejour> getSejourOrdre(Patient p) {
         return getSejours("Select * from visites where ipp='" + p.getIpp() + "' order by dateEntree desc;");
     }
 
@@ -569,14 +569,14 @@ public class ConnexionBD {
             while (rst.next()) {
                 String numSejour = rst.getString("nosj");
                 java.util.Date dateEntree = rst.getDate("dateentree");
-                String nomPH = getPH(rst.getString("phresponsable"));
+                PraticienHospitalier nomPH = getPH(rst.getString("phresponsable"));
                 String ippPatient = rst.getString("ipppatient");
                 TypeSejour typeVisite = TypeSejour.valueOf(rst.getString("typevisite"));
                 java.util.Date dateSortie = rst.getDate("datesortie");
-                String lettreSortie = rst.getString("lettresortie");
+                LettreDeSortie lettreSortie = rst.getString("lettresortie");
                 Service service = getService(rst.getString("service"));
-                ArrayList<String> listePrescription = getPrescriptions
-                Sejour s = new Sejour(numSejour, dateEntree, dateSortie, nomPH, service, lettreSortie, listePrecription);
+                ArrayList<Prescription> listePrescription = getSejour(numSejour).getListePrescription();
+                Sejour s = new Sejour(numSejour, dateEntree, dateSortie, nomPH, service, lettreSortie, listePrescription);
                 sejours.add(s);
             }
         } catch (SQLException e) {
