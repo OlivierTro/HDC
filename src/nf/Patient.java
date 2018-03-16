@@ -14,7 +14,7 @@ import java.util.ArrayList;
  *
  * @author ANNELAURE
  */
-public class Patient extends Personne {
+public class Patient {
 
     private String ipp;
     private String nomUsuel;
@@ -25,34 +25,35 @@ public class Patient extends Personne {
     private Adresse adresse;
     private DPI dpi;
     private String nationalite;
-    private PraticienHospitalier PHResponsable;
     private MedG medecinG;
     private boolean hospitalise;
     private Service localisationService;
     private Timestamp dateEdition;
     private ArrayList<Sejour> listeSejour;
 
-    public Patient(String ipp, String nomUsuel, String nomNaissance, String prenom, Adresse adresse, Date dateNaissance, Sexe sexe, MedG medecinG, PraticienHospitalier ph) {
-        super(nomUsuel, prenom);
+    public Patient(String ipp, String nomUsuel, String nomNaissance, String prenom, Adresse adresse, Date dateNaissance, Sexe sexe, MedG medecinG) {
         this.ipp = ipp;
+        this.nomUsuel = nomUsuel;
         this.nomNaissance = nomNaissance;
+        this.prenom = prenom;
         this.adresse = adresse;
         this.dateNaissance = dateNaissance;
         this.sexe = sexe;
         this.medecinG = medecinG;
-        this.PHResponsable = ph;
     }
     
     public Patient(String nomUsuel, String prenom, Date dateNaissance){
-        super(nomUsuel, prenom);
+        this.nomUsuel=nomUsuel;
+        this.prenom=prenom;
         this.dateNaissance=dateNaissance;
     }
 
     public Patient(String ipp, String nomUsuel, String nomNaissance, String prenom, Adresse adresse, Date dateNaissance, Sexe sexe, MedG medecinG,
             boolean hospitalise, Service localisationService, Timestamp dateEdition) {
-        super(nomUsuel, prenom);
         this.ipp = ipp;
+        this.nomUsuel = nomUsuel;
         this.nomNaissance = nomNaissance;
+        this.prenom = prenom;
         this.adresse = adresse;
         this.dateNaissance = dateNaissance;
         this.sexe = sexe;
@@ -110,10 +111,9 @@ public class Patient extends Personne {
             return false;
         }    
     
-    
-    /*public boolean addSejour(int numSejour, Date dateArrive, String lit, String phresponssable, Service service, Personnel auteur) {
+    public boolean addSejour(int numSejour, Date dateArrive, String lit, String phresponssable, Service service, Personnel auteur) {
         boolean j = false;
-        Sejour sejour= new Sejour();
+        //Sejour sejour= new Sejour();
         if (this.hospitalise == false) {
             try {
                 String requete = "INSERT INTO sejour(ipp,numsejour,datearrive,lit,phresponssable,service,auteur,dateEdition,lettredesortie) "
@@ -133,7 +133,7 @@ public class Patient extends Personne {
                 int i = state.executeUpdate();
                 if (i == 1) {
                     j = true;
-                    Sejour sejour = new Sejour(numSejour, dateArrive, dateSortie, phresponssable, auteur.getId(), lit, service, nownow);
+                    Sejour sejour = new Sejour(numSejour, dateArrive, phresponssable, auteur.getId(), lit, service, nownow);
                     this.listeSejour.add(sejour);
                     setLocalisationService(service);
                     setHospitalise();
@@ -170,7 +170,7 @@ public class Patient extends Personne {
             requete += " WHERE ipp= ? ";
             PreparedStatement state = ConnexionBD.getInstance().prepareStatement(requete);
             state.setInt(1, 0);
-            state.setInt(2, this.ipp);
+            state.setString(2, this.ipp);
             state.executeUpdate();
             state.close();
 
@@ -248,7 +248,7 @@ public class Patient extends Personne {
             e.printStackTrace();
         }
         return j;
-    } */
+    }
 
     // GETTERS & SETTERS
     /**
@@ -314,7 +314,7 @@ public class Patient extends Personne {
     public MedG getMedecinG() {
         return medecinG;
     }
-/*
+
     public static Patient getPatient(int IPP) {
         Patient p = null;
         try {
@@ -339,7 +339,7 @@ public class Patient extends Personne {
             e.printStackTrace();
         }
         return p;
-    }*/
+    }
 
     /**
      * @return the hospitalise
